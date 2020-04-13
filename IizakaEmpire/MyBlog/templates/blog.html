@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="description" content="{{article.meta_description}}">
-        <meta property="og:url" content="{% url 'blog' article.category.slug article.slug %}">
+        <meta property="og:url" content="{% url 'MyBlog:blog' article.category.slug article.slug %}">
         <meta property="og:title" content="{{article.ogp_title}}">
         <meta proparty="og:description" content="{{article.meta_description}}">
         <meta proparty="og:image" content="{{article.ogp_img.url}}">
@@ -44,7 +44,7 @@
                     {%endif%}
                     {%if tags %}
                     {% for tag in tags %}
-                    <button class="btn-square-shadow" onclick="location.href='{%url 'Myblog:search' tag.slug 2 %}'">{{tag.name}}</button>
+                    <button class="btn-square-shadow" onclick="location.href='{%url 'MyBlog:search' tag.slug 2 %}'">{{tag.name}}</button>
                     {%endfor%}
                     {%else%}
                     {%endif%}
@@ -56,13 +56,13 @@
             <div class="row">
                 <div class="col-xs-3"></div>
                 <div class="col-xs-2">
-                    <button><</button>
+                    <!--<button><</button>-->
                 </div>
                 <div class="col-xs-2">
                     <button onclick="location.href='{%url 'MyBlog:index'%}'">home</button>
                 </div>
                 <div class="col-xs-2">
-                    <button>></button>
+                    <!--<button>></button>-->
                 </div>
                 <div class="col-xs-3"></div>
             </div>

@@ -126,6 +126,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_STORAGE='storages.backends.gcloud.GoogleCloudStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+DEFAULT_FILE_STORAGE='storages.backends.gcloud.GoogleCloudStorage'
+
+GS_BUCKET_NAME='admiralhondalogbook'
+
+from google.oauth2 import service_account
+
+GS_CREDENTIALS=service_account.Credentials.from_service_account_file(
+    os.path.join(BASE_DIR,'mysiteandship-3e1fa5ac8c78.json')
+)
+
