@@ -30,16 +30,16 @@
                     {% for topic in article %}
                     <div class="box7">
                         <p>{{topic.4}}</p>
-                        <button class="btn-square-shadow" onclick="location.href='{% url 'MyBlog:search' topic.6 1 %}'">{{topic.7}}</button>
+                        <button class="btn-square-shadow" onclick="location.href='{% url 'MyBlog:search' topic.category.slug 1 %}'">{{topic.7}}</button>
                         <div class="media-left">
-                            <img src="{{MEDIA_URL}}{{topic.3}}" class="media-object" style="width: 250px;height:250px">
+                            <img src="{{topic.ogp_img.url}}" class="media-object" style="width: 250px;height:250px">
                         </div>
                         <div class="media-body">
-                            <h3 class="media-heading">{{topic.1}}</h3>
-                            <p>{{topic.2}}</p>
+                            <h3 class="media-heading">{{topic.title}}</h3>
+                            <p>{{topic.meta_description}}</p>
                         </div>
                         <center>
-                            <button class="btn-square-slant" onclick="location.href='{% url 'MyBlog:blog' topic.6 topic.0 %}'">READ MORE</button>
+                            <button class="btn-square-slant" onclick="location.href='{% url 'MyBlog:blog' topic.category.slug topic.slug %}'">READ MORE</button>
                         </center>
                     </div>
                     {% endfor %}

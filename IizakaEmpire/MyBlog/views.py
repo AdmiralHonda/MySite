@@ -7,18 +7,11 @@ from .models import Article,Author,Category
 def index(request):
 
     try:
-        article=Article.objects.all().values_list('slug','ogp_title','meta_description','ogp_img','pub_date','category')
-    
-        article_List=[]
-
-        for art in article:
-            tmp=Category.objects.get(id=art[5])
-            tmp_tuple=(tmp.slug,tmp.name)
-            article_List.append(art+tmp_tuple)
+        article=Article.objects.all()
 
         author=Author.objects.all()
 
-        pagenate=Paginator(article_List,5)
+        pagenate=Paginator(article,5)
 
         if request.GET:
             p=request.GET.get('page')
@@ -31,7 +24,7 @@ def index(request):
     
         contents={
             'author':author,
-            'article':putart,
+            'article':article,
             'page_num':page_num,
             'current_page':p,
         }
@@ -45,19 +38,13 @@ def index(request):
 def blog(request,div,blog_id):
     
     putart=get_object_or_404(Article,slug=blog_id)
-    recommend=Article.objects.all().values_list('slug','ogp_title','ogp_img','category')[:4]
-
-    recommend_List=[]
-
-    for art in recommend:
-        tmp=Category.objects.get(id=art[3])
-        tmp_tuple=(tmp.slug,tmp.name)
-        recommend_List.append(art+tmp_tuple)
+    recommend=Article.objects.all()[:4]
 
     tags_list=putart.tags.all()
+
     contents={
         'article':putart,
-        'recommend':recommend_List,
+        'recommend':recommend,
         'tags':tags_list,
         'category':putart.category,
     }
@@ -68,22 +55,17 @@ def Categorys(request,type,searchtype):
 
     try:
         if searchtype==1:
-            article=Article.objects.select_related('category').filter(category__slug=type).values_list('slug','ogp_title','meta_description','ogp_img','pub_date','category')
+            article=Article.objects.select_related('category').filter(category__slug=type)
         elif searchtype==2:
-            article=Article.objects.select_related('tags').filter(tags__slug=type).values_list('slug','ogp_title','meta_description','ogp_img','pub_date','category')
+            article=Article.objects.select_related('tags').filter(tags__slug=type)
         else:
             return Http404
     
         article_List=[]
 
-        for art in article:
-            tmp=Category.objects.get(id=art[5])
-            tmp_tuple=(tmp.slug,tmp.name)
-            article_List.append(art+tmp_tuple)
-
         author=Author.objects.all()
 
-        pagenate=Paginator(article_List,5)
+        pagenate=Paginator(article,5)
 
         if request.GET:
             p=request.GET.get('page')

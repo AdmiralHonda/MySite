@@ -70,12 +70,12 @@
                 {%if recommend%}
                 {% for article in recommend %}
                     <div class="col-xs-3">
-                        <a href="{% url 'MyBlog:blog' article.4 article.0 %}">
+                        <a href="{% url 'MyBlog:blog' article.category.slug article.slug %}">
                             <div class="thumbnail">
-                                <img src="{{MEDIA_URL}}{{article.2}}" style="width: 100;" alt="srticle.0">
+                                <img src="{{article.ogp_img.url}}" style="width: 100;" alt="srticle.slug">
                             </div>
                             <div class="caption">
-                                <p>{{article.1}}</p>
+                                <p>{{article.title}}</p>
                             </div>
                         </a>
                     </div>
