@@ -16,41 +16,55 @@
         {%load static%}
         <link rel="stylesheet" type="text/css" href="{%static 'blog.css' %}">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+        <script src="https://ajax.geoogleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <title>{{article.title}}</title>
     </head>
 
-    <body>
+    <body>  
         <div class="container">
             <div class="row">
                 <div  class="col-xs-12" style="background-color: darkcyan;color:white;">
-                    <h1>Blog of AdmiralHonda</h1>
+                    <h1>AdmiralHonda's LogBook</h1>
                     <p>プログラミングや趣味のアウトドアについて色々</p>
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-12">
+                <div class="col-xs-10">
                     <center>
                         <h1>
                             {{article.title}}
                         </h1>
+
                     </center>
                     <p style="float: right;">更新日<br>{{article.up_date}}</p>
-                    {%if category%}
-                    <button class="btn-square-shadow" onclick="location.href='{% url 'MyBlog:search' category.slug 1 %}'">{{category.name}}</button>
+                    {%if article.category%}
+                    <button class="btn-square-shadow" onclick="location.href='{% url 'MyBlog:search' article.category.slug 1 %}'">{{article.category.name}}</button>
                     <br>
                     {%else%}
                     {%endif%}
                     {%if tags %}
                     {% for tag in tags %}
-                    <button class="btn-square-shadow" onclick="location.href='{%url 'MyBlog:search' tag.slug 2 %}'">{{tag.name}}</button>
+                    <button class="btn-square-shadow" onclick="location.href='{% url 'MyBlog:search' tag.slug 2 %}'">{{tag.name}}</button>
                     {%endfor%}
                     {%else%}
                     {%endif%}
                     <article>
                         {{article.exchange_markdown|safe}}
                     </article>
+                </div>
+                <div class="col-xs-2">
+                    <ul class="nav nav-pills nav-stacked" style="position: fixed; right:0px;">
+                        <li><a href="{% url 'MyBlog:index'%}">Home</a></li>
+                        {% if category %}
+                        {%for topic in category%}
+                        <li><a href="{% url 'MyBlog:search' topic.slug 1 %}">{{topic.name}}</a></li>
+                        {%endfor%}
+                        {%else%}
+                        {%endif%}
+                        <li><a href="#">SitePolicy</a></li>
+                      </ul>
+
                 </div>
             </div>
             <div class="row">

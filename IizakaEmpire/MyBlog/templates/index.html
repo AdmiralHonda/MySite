@@ -18,7 +18,7 @@
             <!--header-->
             <div class="row">
                 <div  class="col-xs-12" style="background-color: darkcyan;color:white;">
-                    <h1>Blog of AdmiralHonda</h1>
+                    <h1>AdmiralHonda's LogBook</h1>
                     <p>プログラミングや趣味のアウトドアについて色々</p>
                 </div>
             </div>
@@ -29,8 +29,8 @@
                     {% if article %}
                     {% for topic in article %}
                     <div class="box7">
-                        <p>{{topic.4}}</p>
-                        <button class="btn-square-shadow" onclick="location.href='{% url 'MyBlog:search' topic.category.slug 1 %}'">{{topic.7}}</button>
+                        <p>{{topic.pub_date}}</p>
+                        <button class="btn-square-shadow" onclick="location.href='{% url 'MyBlog:search' topic.category.slug 1 %}'">{{topic.category.name}}</button>
                         <div class="media-left">
                             <img src="{{topic.ogp_img.url}}" class="media-object" style="width: 250px;height:250px">
                         </div>

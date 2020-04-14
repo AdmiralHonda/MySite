@@ -24,7 +24,7 @@ def index(request):
     
         contents={
             'author':author,
-            'article':article,
+            'article':putart,
             'page_num':page_num,
             'current_page':p,
         }
@@ -41,12 +41,12 @@ def blog(request,div,blog_id):
     recommend=Article.objects.all()[:4]
 
     tags_list=putart.tags.all()
-
+    categ=Category.objects.all()
     contents={
         'article':putart,
         'recommend':recommend,
         'tags':tags_list,
-        'category':putart.category,
+        'category':categ,
     }
 
     return render(request,'blog.html',contents)
@@ -57,11 +57,9 @@ def Categorys(request,type,searchtype):
         if searchtype==1:
             article=Article.objects.select_related('category').filter(category__slug=type)
         elif searchtype==2:
-            article=Article.objects.select_related('tags').filter(tags__slug=type)
+            article=Article.objects.filter(tags__slug=type)
         else:
             return Http404
-    
-        article_List=[]
 
         author=Author.objects.all()
 
@@ -84,6 +82,7 @@ def Categorys(request,type,searchtype):
         }
 
         return render(request,'index.html',contents)
+
     except (KeyError,Article.DoesNotExist,Category.DoesNotExist):
         return Http404("お探しのコンテンツが見つかりませんでした。\n")
     else:
