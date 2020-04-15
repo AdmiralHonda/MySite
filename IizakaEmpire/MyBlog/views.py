@@ -1,7 +1,7 @@
 from django.shortcuts import render,get_list_or_404,get_object_or_404
 from django.core.paginator import Paginator
 from django.http import HttpResponse,Http404
-from .models import Article,Author,Category
+from .models import Article,Author,Category,Policy
 # Create your views here.
 
 def index(request):
@@ -87,3 +87,12 @@ def Categorys(request,type,searchtype):
         return Http404("お探しのコンテンツが見つかりませんでした。\n")
     else:
         return HttpResponse("障害が発生中です。\nお時間を置いてのアクセスをお願い致します。")
+
+def sitepolicy(request):
+    policy=get_object_or_404(Policy,id=1)
+
+    contexts={
+        'policy':policy,
+    }
+
+    return render(request,'',contexts)

@@ -55,3 +55,12 @@ class Author(models.Model):
     
     def exchange_markdown(self):
         return markdownify(self.contents)
+
+class Policy(models.Model):
+    contents=MarkdownxField('POLICY',help_text='This Field define SitePolicy')
+
+    def __str__(self):
+        return 'SitePolicy'
+    
+    def exchange_markdown(self):
+        return markdownify(self.contents)

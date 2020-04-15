@@ -37,6 +37,7 @@
                         </h1>
 
                     </center>
+                    <p style="float: right;">作成日<br>{{article.pub_date}}</p>
                     <p style="float: right;">更新日<br>{{article.up_date}}</p>
                     {%if article.category%}
                     <button class="btn-square-shadow" onclick="location.href='{% url 'MyBlog:search' article.category.slug 1 %}'">{{article.category.name}}</button>
@@ -62,7 +63,7 @@
                         {%endfor%}
                         {%else%}
                         {%endif%}
-                        <li><a href="#">SitePolicy</a></li>
+                        <li><a href="{% url 'MyBlog:policy'%}">SitePolicy</a></li>
                       </ul>
 
                 </div>
