@@ -24,21 +24,59 @@
     <body>  
         <div class="container">
             <div class="row">
-                <div  class="col-xs-12" style="background-color: darkcyan;color:white;">
+                <div class="col-xs-1"></div>
+                <div  class="col-xs-10" style="background-color: darkcyan;color:white;">
                     <h1>AdmiralHonda's LogBook</h1>
                     <p>プログラミングや趣味のアウトドアについて色々</p>
                 </div>
+                <div class="col-xs-1"></div>
             </div>
             <div class="row">
+                <div class="col-xs-1"></div>
+                <div class="col-xs-10">
+                    <nav class="navbar navbar-inverse">
+                        <div class="container-fluid">
+                          <ul class="nav navbar-nav">
+                            <li><a href="{%url 'MyBlog:index'%}">Home</a></li>
+                            {%if category%}
+                            {% for topic in category%}
+                            <li><a href="{%url 'MyBlog:search' topic.slug 1 %}">{{topic.name}}</a></li>
+                            {% endfor%}
+                            {%else%}
+                            {%endif%}
+                            <li><a href="{%url 'MyBlog:policy'%}">このサイトに関して</a></li>
+                          </ul>
+                        </div>
+                      </nav>
+                </div>
+                <div class="col-xs-1"></div>
+            </div>
+            <br>
+            <br>
+            <br>
+            <div class="row">
+                <div class="col-xs-1"></div>
                 <div class="col-xs-10">
                     <center>
                         <h1>
                             {{article.title}}
                         </h1>
-
                     </center>
-                    <p style="float: right;">作成日<br>{{article.pub_date}}</p>
-                    <p style="float: right;">更新日<br>{{article.up_date}}</p>
+                    <div>
+                    <div>
+                        <!--facebook-->
+                        
+                        <!--twitter-->
+                        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+                        <a href="https://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="touch-counter" data-hatena-bookmark-width="40" data-hatena-bookmark-height="40" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+                    </div>
+                    <p style="float: right; font-size:15px">作成日<br>{{article.pub_date}}</p>
+                    <br>
+                    <br>
+                    <br>
+                    <p style="float: right; font-size:15px">更新日<br>{{article.up_date}}</p>
+                    </div>
                     {%if article.category%}
                     <button class="btn-square-shadow" onclick="location.href='{% url 'MyBlog:search' article.category.slug 1 %}'">{{article.category.name}}</button>
                     <br>
@@ -54,34 +92,15 @@
                         {{article.exchange_markdown|safe}}
                     </article>
                 </div>
-                <div class="col-xs-2">
-                    <ul class="nav nav-pills nav-stacked" style="position: fixed; right:0px;">
-                        <li><a href="{% url 'MyBlog:index'%}">Home</a></li>
-                        {% if category %}
-                        {%for topic in category%}
-                        <li><a href="{% url 'MyBlog:search' topic.slug 1 %}">{{topic.name}}</a></li>
-                        {%endfor%}
-                        {%else%}
-                        {%endif%}
-                        <li><a href="{% url 'MyBlog:policy'%}">SitePolicy</a></li>
-                      </ul>
+                <div class="col-xs-1"></div>
+            </div>
 
-                </div>
-            </div>
             <div class="row">
-                <div class="col-xs-3"></div>
-                <div class="col-xs-2">
-                    <!--<button><</button>-->
-                </div>
-                <div class="col-xs-2">
-                    <button onclick="location.href='{%url 'MyBlog:index'%}'">home</button>
-                </div>
-                <div class="col-xs-2">
-                    <!--<button>></button>-->
-                </div>
-                <div class="col-xs-3"></div>
-            </div>
-            <div class="row">
+                <br>
+                <br>
+                <h1 class="recommend">
+                    おすすめの記事
+                </h1>
                 {%if recommend%}
                 {% for article in recommend %}
                     <div class="col-xs-3">

@@ -25,7 +25,7 @@ SECRET_KEY = sercret.CONNECTIONKEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -80,8 +80,10 @@ WSGI_APPLICATION = 'IizakaEmpire.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
-DATABASES = sercret.YOURDATABASECONFIG
+if os.getenv('GAE_APPLICATION',None):
+    DATABASES=sercret.YOURDATABASEDEPLOYCONFIG
+else:
+    DATABASES = sercret.YOURDATABASECONFIG
 
 
 # Password validation
@@ -127,7 +129,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 DEFAULT_FILE_STORAGE='storages.backends.gcloud.GoogleCloudStorage'
 
-GS_BUCKET_NAME='admiralhondalogbook'
+GS_BUCKET_NAME=sercret.YOURBUCKETNAME
 
 from google.oauth2 import service_account
 

@@ -1,3 +1,4 @@
+
 .box7{
     padding: 0.5em 1em;
     margin: 2em 0;
@@ -71,11 +72,8 @@
   .btn-square-slant:active:after, .btn-square-slant:active:before {
     content: none;/*ボタンを押すと線が消える*/
   }
-  ul {
-    padding: 0;
-  }
   
-  ul li, ol li {
+  .outline {
     color: #404040;
     border-left: solid 6px darkcyan;/*左側の線*/
     border-bottom: solid 2px #dadada;/*下に灰色線*/
@@ -87,41 +85,37 @@
     font-weight: bold;
   }
 
+  p{
+    font-size: 15px;
+  }
 
   img {
     display: block;
-    max-width: 100%;
-    height: auto;
-  }
-  h1 {
+    max-width: 400px;
+    height: 400px;
     position: relative;
-    padding-left: 25px;
+    left: auto;
+    right: auto;
   }
-  
-  h1:before {
-    position: absolute;
-    content: '';
-    bottom: -3px;
-    left: 0;
-    width: 0;
-    height: 0;
-    border: none;
-    border-left: solid 15px transparent;
-    border-bottom: solid 15px darkcyan;
-  }
-  h1:after {
-    position: absolute;
-    content: '';
-    bottom: -3px;
-    left: 10px;
-    width: 100%;
-    border-bottom: solid 3px darkcyan;
+
+  /*見出し周り*/
+
+  h1 {
+    /*線の種類（二重線）太さ 色*/
+    border-bottom: double 5px darkcyan;
   }
 
   h2 {
-    background: linear-gradient(transparent 70%, darkcyan 70%);
+    padding: 0.4em 0.5em;/*文字の上下 左右の余白*/
+    color: #494949;/*文字色*/
+    background: #f4f4f4;/*背景色*/
+    border-left: solid 5px darkcyan;/*左線*/
+    border-bottom: solid 3px #d7d7d7;/*下線*/
   }
 
+  h3 {
+    border-bottom: darkcyan;
+  }
   .box27 {
     position: relative;
     margin: 2em 0;
@@ -162,4 +156,24 @@
   transform: translateY(4px);/*下に動く*/
   box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);/*影を小さく*/
   border-bottom: none;
+}
+
+.recommend {
+  position: relative;/*相対位置*/
+  padding: 0.5em 0.5em 0.5em 1.5em;/*アイコン分のスペース*/
+  line-height: 1.4;/*行高*/
+  color: darkcyan;/*文字色*/
+  border-top: dotted 1px gray;
+  border-bottom: dotted 1px gray;
+  background: #fffff4;
+}
+
+.recommend:before {
+  font-family: "Font Awesome 5 Free";/*忘れずに*/
+  content: "\f138";/*アイコンのユニコード*/
+  position: absolute;/*絶対位置*/
+  font-size: 1em;/*サイズ*/
+  left: 0.25em;/*アイコンの位置*/
+  top: 0.5em;/*アイコンの位置*/
+  color: darkcyan; /*アイコン色*/
 }

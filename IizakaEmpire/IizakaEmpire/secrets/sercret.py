@@ -11,4 +11,14 @@ YOURDATABASECONFIG={
 
 CONNECTIONKEY='w-idd&50vv9uyx3-n0i-b4(b5e+6$r&y1zl*3ua865+^urzs_^'
 
-YOURDATABASEDEPLOYCONFIG={}
+YOURBUCKETNAME='admiralhondalogbook'
+
+YOURDATABASEDEPLOYCONFIG={
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'admiralhonda_article',
+        'USER': 'root',
+        'PASSWORD': 'nanami1993',
+        'HOST':'/cloudsql/mysiteandship:asia-northeast1:admiralhondalogbook',
+    }
+}

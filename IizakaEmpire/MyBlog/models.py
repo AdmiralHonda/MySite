@@ -28,7 +28,7 @@ class Article(models.Model):
     ogp_img=models.ImageField(upload_to='ogp_img')
     pub_date=models.DateTimeField('作成日時',auto_now_add=True)
     up_date=models.DateTimeField('更新日時',auto_now=True)
-    contents=MarkdownxField('Contents',help_text='box9 is note box<div>')
+    contents=MarkdownxField('Contents',help_text='box9 is note box<div>\n outline is list\n ')
     
     def __str__(self):
         return self.title

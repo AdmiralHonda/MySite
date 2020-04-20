@@ -17,15 +17,38 @@
         <div class="container">
             <!--header-->
             <div class="row">
-                <div  class="col-xs-12" style="background-color: darkcyan;color:white;">
+                <div class="col-xs-1"></div>
+                <div  class="col-xs-10" style="background-color: darkcyan;color:white;">
                     <h1>AdmiralHonda's LogBook</h1>
                     <p>アプリの実装や趣味のアウトドアなど人生という航海の中での記録</p>
                 </div>
+                <div class="col-xs-1"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-1"></div>
+                <div class="col-xs-10">
+                    <nav class="navbar navbar-inverse">
+                        <div class="container-fluid">
+                          <ul class="nav navbar-nav">
+                            <li><a href="{%url 'MyBlog:index'%}">Home</a></li>
+                            {%if category%}
+                            {% for topic in category%}
+                            <li><a href="{%url 'MyBlog:search' topic.slug 1 %}">{{topic.name}}</a></li>
+                            {% endfor%}
+                            {%else%}
+                            {%endif%}
+                            <li><a href="{%url 'MyBlog:policy'%}">このサイトに関して</a></li>
+                          </ul>
+                        </div>
+                      </nav>
+                </div>
+                <div class="col-xs-1"></div>
             </div>
             <!--ArticleList-->
             <div class="row">
-                <div class="col-xs-8">
-                    <h3>最近の更新</h3>
+                <div class="col-xs-1"></div>
+                <div class="col-xs-7">
+                    <h3>記事の一覧</h3>
                     {% if article %}
                     {% for topic in article %}
                     <div class="box7">
@@ -67,7 +90,7 @@
                     <p>ただいま障害が発生中です。少々お待ちください</p>
                     {% endif %}
                 </div>
-                <div class="col-xs-4">
+                <div class="col-xs-3">
                     <div class="box27">
                         <span class="box-title">Author</span>
                         {%if author%}
@@ -83,6 +106,7 @@
                     <!--↑profile-->
                 </div>
                 <!--↑-->
+                <div class="col-xs-1"></div>
             </div>
         </div>
     </body>
