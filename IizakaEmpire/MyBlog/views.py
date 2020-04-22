@@ -74,12 +74,13 @@ def Categorys(request,type,searchtype):
 
         putart=pagenate.get_page(p)
         page_num=pagenate.page_range
-    
+        categ=Category.objects.all()
         contents={
             'author':author,
             'article':putart,
             'page_num':page_num,
             'current_page':p,
+            'category':categ,
         }
 
         return render(request,'index.html',contents)
