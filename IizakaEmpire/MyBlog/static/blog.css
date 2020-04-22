@@ -73,7 +73,7 @@
     content: none;/*ボタンを押すと線が消える*/
   }
   
-  .outline {
+  li h4 {
     color: #404040;
     border-left: solid 6px darkcyan;/*左側の線*/
     border-bottom: solid 2px #dadada;/*下に灰色線*/
@@ -84,6 +84,7 @@
     list-style-type: none!important;/*ポチ消す*/
     font-weight: bold;
   }
+
 
   p{
     font-size: 15px;

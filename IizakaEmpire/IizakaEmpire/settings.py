@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'MyBlog.apps.MyblogConfig',#myblog_app
     'markdownx',#markdown
     'django_cleanup',#for rm image
-    'django.contrib.sites',#for sitemap
+    #'django.contrib.sites',#for sitemap←if you manage single site,this app cause error 'Does't exist /admin/login'
     'django.contrib.sitemaps',#for sitemap
 ]
 
