@@ -1,0 +1,6 @@
+# nomal conf 
+User-agent:*
+Allow: /
+
+#for searching location of sitemap
+Sitemap: http://mysiteandship.appspot.com/sitemap.xml
