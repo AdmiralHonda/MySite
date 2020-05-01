@@ -24,6 +24,8 @@ SECRET_KEY = sercret.CONNECTIONKEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+if os.getenv('GAE_APPLICATION',None):
+    DEBUG=False
 
 ALLOWED_HOSTS = ["*"]
 
