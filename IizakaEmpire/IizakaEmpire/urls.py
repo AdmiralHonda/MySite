@@ -19,7 +19,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.sitemaps.views import sitemap
 from .sitemaps import MyBlogSitemap,StaticSitemap
-
+from django.views.generic import TemplateView
 sitemaps={
     'blog':MyBlogSitemap,
     'static':StaticSitemap,
@@ -30,6 +30,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('markdownx/',include('markdownx.urls')),
     path('sitemap.xml',sitemap,{'sitemaps' : sitemaps},name='django.contrib.sitemaps.views.sitemap'),
+    path('robots.txt',TemplateView.as_view(template_name="robots.txt",content_type="text/plain"))
 ]
 
 if settings.DEBUG:

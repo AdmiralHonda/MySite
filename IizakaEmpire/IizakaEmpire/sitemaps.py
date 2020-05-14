@@ -3,8 +3,8 @@ from django.urls import reverse
 from MyBlog.models import Article
 
 class MyBlogSitemap(Sitemap):
-    changefreq="weekly"
-    priority=0.6
+    changefreq="yearly"
+    priority=1.0
 
     def items(self):
         return Article.objects.all()
@@ -20,7 +20,7 @@ class MyBlogSitemap(Sitemap):
     
 class StaticSitemap(Sitemap):
     changefreq="weekly"
-    priority=0.5
+    priority=0.8
 
     def items(self):
         return ['MyBlog:index','MyBlog:policy']
