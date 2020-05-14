@@ -3,4 +3,4 @@ User-agent:*
 Allow: /
 
 #for searching location of sitemap
-Sitemap: http://www.admiralhonda.com/sitemap.xml
+Sitemap: https://www.admiralhonda.com/sitemap.xml

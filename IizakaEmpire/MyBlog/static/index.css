@@ -122,3 +122,12 @@
     margin-right: auto;
   }
   }
+  div a {
+    text-decoration: none;
+    text-emphasis: none;
+    color: black;
+
+  }
+  div a:link,div a:visited,div a:hover,div a:active{
+    color: black;
+  }

@@ -24,15 +24,16 @@
         <script src="https://ajax.geoogleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <title>{{article.title}}</title>
+        <script data-ad-client="ca-pub-3952779346887893" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.ls"></script>
         <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-163807865-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-163807865-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
 
-  gtag('config', 'UA-163807865-1');
-</script>
+            gtag('config', 'UA-163807865-1');
+        </script>
 
     </head>
 
@@ -40,7 +41,7 @@
         <div class="container">
             <div class="row">
                 <div  class="col-xs-12" style="background-color: darkcyan;color:white;">
-                    <h1>AdmiralHonda's LogBook</h1>
+                    <p class="h1">AdmiralHonda's LogBook</p>
                     <p>プログラミングや趣味のアウトドアについて色々</p>
                 </div>
             </div>
@@ -66,21 +67,15 @@
             <br>
             <br>
             <div class="row">
-                <center>
-                        <h1>
+                <div class="colxs-12">
+                        <h1 style="text-align: center;">
                             {{article.title}}
                         </h1>
-                    </center>
+                </div>
+                
                 <div class="col-xs-12">
-                    <div>
-                        <img src="{%static 'img/submit.svg'%}" style="width: 16px; height:auto;" align="left">
-                        <p>{{article.pub_date}}</p>
-                    </div>
-                    <br>
-                    <div>
-                        <img src="{%static 'img/update.svg'%}" style="width: 16px; height:auto;" align="left">
-                        <p>{{article.up_date}}</p>
-                    </div>
+                        <p><img src="{%static 'img/submit.svg'%}" style="width:2em; height:auto;" align="left">{{article.pub_date}}</p>
+                        <p><img src="{%static 'img/update.svg'%}" style="width:2em; height:auto;" align="left">{{article.up_date}}</p>
                 </div>
             </div>
                 <div class="row">
@@ -99,9 +94,9 @@
                         <div align="right">
                             <!--facebook-->
                             <!--twitter-->
-                            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" style="margin:2%;" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     
-                            <a href="https://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="touch-counter" data-hatena-bookmark-width="40" data-hatena-bookmark-height="40" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+                            <a href="https://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" style="margin:2%;" data-hatena-bookmark-layout="touch-counter" data-hatena-bookmark-width="40" data-hatena-bookmark-height="40" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
                         </div>
                         <article>
                             {{article.exchange_markdown|safe}}
@@ -112,15 +107,18 @@
             <div class="row">
                 <br>
                 <br>
-                <h1 class="recommend">
-                    おすすめの記事
-                </h1>
+                <div class="col-xs-12">
+                    <h1 class="recommend">
+                        おすすめの記事
+                    </h1>
+                </div>
+                
                 {%if recommend%}
                 {% for article in recommend %}
                     <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
                         <a href="{% url 'MyBlog:blog' article.category.slug article.slug %}">
                             <div class="thumbnail">
-                                <img src="{{article.ogp_img.url}}" style="width: 100%; height:auto;" alt="srticle.slug">
+                                <img src="{{article.ogp_img.url}}" style="width: 100%; height:auto;" alt="{{artice.slug}}">
                             </div>
                             <div class="caption">
                                 <p>{{article.title}}</p>
