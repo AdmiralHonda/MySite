@@ -20,7 +20,7 @@ class MyBlogSitemap(Sitemap):
     
 class StaticSitemap(Sitemap):
     changefreq="weekly"
-    priority=0.5
+    priority=0.8
 
     def items(self):
         return ['MyBlog:index','MyBlog:policy']
