@@ -1,109 +1,56 @@
-<!DOCTYPE html>
-<html lang="ja">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="dscription" content="AdmiralHondaの人生という航海の中での日誌">
-        <title>AdmiralHondaの航海日誌</title>
-        {% load static %}
-        <link rel="stylesheet" type="text/css" href="{%static 'index.css' %}">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    </head>
-    
-    <body>
-        <div class="container">
-            <!--header-->
-            <div class="row">
-                <div  class="col-xs-12" style="background-color: darkcyan;color:white;">
-                    <h1>AdmiralHonda's LogBook</h1>
-                    <p>アプリの実装や趣味のアウトドアなど人生という航海の中での記録</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <nav class="navbar navbar-inverse">
-                        <div class="container-fluid">
-                          <ul class="nav navbar-nav">
-                            <li><a href="{%url 'MyBlog:index'%}">Home</a></li>
-                            {%if category%}
-                            {% for topic in category%}
-                            <li><a href="{%url 'MyBlog:search' topic.slug 1 %}">{{topic.name}}</a></li>
-                            {% endfor%}
-                            {%else%}
-                            {%endif%}
-                            <li><a href="{%url 'MyBlog:policy'%}">このサイトに関して</a></li>
-                          </ul>
-                        </div>
-                      </nav>
-                </div>
-            </div>
-            <!--ArticleList-->
-            <div class="row">
-                <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
-                    <h3>記事の一覧</h3>
-                    {% if article %}
+{%extends 'base.html'%}
+
+{% block header %}
+<meta name="description" content="人生という航海の中での日誌。主に釣りのブログです。">
+<title>AdmiralHonda's LogBook</title>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{%static 'index.css' %}">
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-sm-12 col-md-8">
+            <h3>記事の一覧</h3>
+            {% if article %}
                     {% for topic in article %}
                     <div class="box7">
                         <p>{{topic.pub_date}}</p>
                         <button class="btn-square-shadow" onclick="location.href='{% url 'MyBlog:search' topic.category.slug 1 %}'">{{topic.category.name}}</button>
                         <center>
                         <h3 style="margin-left: auto; margin-right: auto;">{{topic.title}}</h3>
-                        </center>
+
                         <div class="media-buttom">
-                            <img src="{{topic.ogp_img.url}}" class="media-object">
+                            <a href="{% url 'MyBlog:blog' topic.category.slug topic.slug %}">
+                                <img src="{{topic.ogp_img.url}}" class="media-object">
+                            </a>
                         </div>
                         <div class="media-body">
-                            <p style="font-size: 15px; padding:10px;">{{topic.meta_description}}</p>
+                            <p style="font-size: 110%; padding:1em;">{{topic.meta_description}}</p>
                         </div>
-                        <center>
                             <button class="btn-square-slant" onclick="location.href='{% url 'MyBlog:blog' topic.category.slug topic.slug %}'">READ MORE</button>
-                        </center>
                     </div>
                     {% endfor %}
-                    <center>
-                    <ul class="pagination">
-                        <!--{%if previous_page%}
-                        <li><a href="?page={{previous_page}}">前のページ</a></li>
-                        {%else%}
-                        {%endif%}-->
-                            {%for page in page_num%}
-                            {%if page == current_page %}
-                            <li class="active"><a href="?page={{page}}">{{page}}</a></li>
-                            {%else%}
-                            <li><a href="?page={{page}}">{{page}}</a></li>
-                            {%endif%}
-                            {%endfor%}
-                            <!--
-                        {%if next_page%}
-                        <li><a href="?page={{next_page}}">次のページ</a></li>
-                        {%else%}
-                        {%endif%}-->
-                      </ul>
-                      </center>
-                    {% else %}
-                    <p>ただいま障害が発生中です。少々お待ちください</p>
-                    {% endif %}
-                </div>
-                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-                    <div class="box27">
-                        <span class="box-title">Author</span>
-                        {%if author%}
-                        <center>
-                            <img src="{{author.0.profimg.url}}" style="width:100%;height:auto;">
-                            </center>
-                            <h4>{{author.0.name}}</h4>
-                            {{author.0.exchange_markdown|safe}}
-                        {%else%}
-                        <p>まだないみたい</p>
-                        {%endif%}
-                    </div>
-                    <!--↑profile-->
-                </div>
-                <!--↑-->
-            </div>
+            {%endif%}
         </div>
-    </body>
-</html>
+        <div class="col-sm-12 col-md-4">
+            <div class="box27">
+                <span class="box-title">Author</span>
+                {%if author%}
+                <center>
+                    <img src="{{author.0.profimg.url}}" style="width:100%;height:auto;">
+                    </center>
+                    <h4>{{author.0.name}}</h4>
+                    {{author.0.exchange_markdown|safe}}
+                {%else%}
+                <p>まだないみたい</p>
+                {%endif%}
+            </div>
+            <a class="twitter-timeline" href="https://twitter.com/AdmiralHonda?ref_src=twsrc%5Etfw">Tweets by AdmiralHonda</a>
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+        </div>
+    </div>
+
+
+{% endblock %}

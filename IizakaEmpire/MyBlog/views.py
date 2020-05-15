@@ -1,10 +1,21 @@
 from django.shortcuts import render,get_list_or_404,get_object_or_404
 from django.core.paginator import Paginator
 from django.http import HttpResponse,Http404
+from django.views.generic import TemplateView,ListView,DetailView
 from .models import Article,Author,Category,Policy
 # Create your views here.
 
-def index(request):
+class index(ListView):
+    model=Article
+    template_name='index.html'
+    context_object_name='article'
+
+    def get_context_data(self,**kwargs):
+        context=super().get_context_data(**kwargs)
+        context['author']=Author.objects.all()
+
+        return context
+"""
 
     try:
         article=Article.objects.all()
@@ -36,6 +47,15 @@ def index(request):
     else:
         return HttpResponse("障害が発生中です。\nお時間を置いてのアクセスをお願い致します。")
 
+"""
+
+class blog(DetailView):
+
+    model=Article
+    template_name='blog.html'
+    context_object_name='article'
+
+"""
 def blog(request,div,blog_id):
     
     putart=get_object_or_404(Article,slug=blog_id)
@@ -51,6 +71,8 @@ def blog(request,div,blog_id):
     }
 
     return render(request,'blog.html',contents)
+
+"""
 
 def Categorys(request,type,searchtype):
 

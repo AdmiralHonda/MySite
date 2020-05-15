@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html lang="ja">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+{%extends 'base.html'%}
+
+{%block header%}
         <meta name="description" content="{{article.meta_description}}">
         <meta property="og:url" content="{% url 'MyBlog:blog' article.category.slug article.slug %}">
         <meta property="og:title" content="{{article.ogp_title}}">
@@ -12,112 +9,50 @@
         <meta proparty="og:type" content="{{article.category.slug}}">
         <meta proparty="og:site_name" content="AdmiralHondaの航海日誌">
         <meta proparty="og:locale" content="ja_JP">
-
         {%load static%}
         <link rel="stylesheet" type="text/css" href="{%static 'blog.css' %}">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://ajax.geoogleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <title>{{article.title}}</title>
-    </head>
+{%endblock%}
 
-    <body>  
-        <div class="container">
-            <div class="row">
-                <div  class="col-xs-12" style="background-color: darkcyan;color:white;">
-                    <h1>AdmiralHonda's LogBook</h1>
-                    <p>プログラミングや趣味のアウトドアについて色々</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <nav class="navbar navbar-inverse">
-                        <div class="container-fluid">
-                          <ul class="nav navbar-nav">
-                            <li><a href="{%url 'MyBlog:index'%}">Home</a></li>
-                            {%if category%}
-                            {% for topic in category%}
-                            <li><a href="{%url 'MyBlog:search' topic.slug 1 %}">{{topic.name}}</a></li>
-                            {% endfor%}
-                            {%else%}
-                            {%endif%}
-                            <li><a href="{%url 'MyBlog:policy'%}">このサイトに関して</a></li>
-                          </ul>
-                        </div>
-                      </nav>
-                </div>
-            </div>
-            <br>
-            <br>
-            <br>
-            <div class="row">
-                <center>
-                        <h1>
-                            {{article.title}}
-                        </h1>
-                    </center>
-                <div class="col-xs-12">
-                    <div>
-                        <img src="{%static 'img/submit.svg'%}" style="width: 16px; height:auto;" align="left">
-                        <p>{{article.pub_date}}</p>
-                    </div>
-                    <br>
-                    <div>
-                        <img src="{%static 'img/update.svg'%}" style="width: 16px; height:auto;" align="left">
-                        <p>{{article.up_date}}</p>
-                    </div>
-                </div>
-            </div>
-                <div class="row">
-                    <div class="col-xs-12">
-                        {%if article.category%}
-                        <button class="btn-square-shadow" onclick="location.href='{% url 'MyBlog:search' article.category.slug 1 %}'">{{article.category.name}}</button>
-                        <br>
-                        {%else%}
-                        {%endif%}
-                        {%if tags %}
-                        {% for tag in tags %}
-                        <button class="btn-square-shadow" onclick="location.href='{% url 'MyBlog:search' tag.slug 2 %}'">{{tag.name}}</button>
-                        {%endfor%}
-                        {%else%}
-                        {%endif%}
-                        <div align="right">
-                            <!--facebook-->
-                            <!--twitter-->
-                            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+{%block content%}
+
+<div class="row">
+    <div class="col-xs-12">
+            <h1 style="text-align: center;">
+                {{article.title}}
+            </h1>
+    </div>
     
-                            <a href="https://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="touch-counter" data-hatena-bookmark-width="40" data-hatena-bookmark-height="40" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-                        </div>
-                        <article>
-                            {{article.exchange_markdown|safe}}
-                        </article>
-                    </div>
-                </div>
+    <div class="col-xs-12">
+            <p><img src="{%static 'img/submit.svg'%}" style="width:2em; height:auto;" align="left">{{article.pub_date|date}}</p>
+            <p><img src="{%static 'img/update.svg'%}" style="width:2em; height:auto;" align="left">{{article.up_date|date}}</p>
+    </div>
+</div>
 
-            <div class="row">
-                <br>
-                <br>
-                <h1 class="recommend">
-                    おすすめの記事
-                </h1>
-                {%if recommend%}
-                {% for article in recommend %}
-                    <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                        <a href="{% url 'MyBlog:blog' article.category.slug article.slug %}">
-                            <div class="thumbnail">
-                                <img src="{{article.ogp_img.url}}" style="width: 100%; height:auto;" alt="srticle.slug">
-                            </div>
-                            <div class="caption">
-                                <p>{{article.title}}</p>
-                            </div>
-                        </a>
-                    </div>
-                {%endfor%}
-                {%else%}
-                {%endif%}
-            </div>
+<div class="row">
+    <div class="col-xs-12">
+        {%if article.category%}
+        <button class="btn-square-shadow" onclick="location.href='{% url 'MyBlog:search' article.category.slug 1 %}'">{{article.category.name}}</button>
+        <br>
+        {%else%}
+        {%endif%}
+        {%if tags %}
+        {% for tag in tags %}
+        <button class="btn-square-shadow" onclick="location.href='{% url 'MyBlog:search' tag.slug 2 %}'">{{tag.name}}</button>
+        {%endfor%}
+        {%else%}
+        {%endif%}
+        <div align="right">
+            <!--facebook-->
+            <!--twitter-->
+            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" style="margin:2%;" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
+            <a href="https://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" style="margin:2%;" data-hatena-bookmark-layout="touch-counter" data-hatena-bookmark-width="40" data-hatena-bookmark-height="40" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
         </div>
-        <!--page end-->
-    </body>
-</html>
+        <article>
+            {{article.exchange_markdown|safe}}
+        </article>
+    </div>
+</div>
+
+{%endblock%}
