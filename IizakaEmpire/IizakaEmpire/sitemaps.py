@@ -13,10 +13,10 @@ class MyBlogSitemap(Sitemap):
         return obj.pub_date
 
     def location(self,obj):
-        return reverse('MyBlog:blog',kwargs={
-            'div': obj.category.slug,
-            'blog_id': obj.slug,
-        })
+        return reverse('MyBlog:blog', args = [
+            obj.category.slug,
+            obj.slug,
+        ])
     
 class StaticSitemap(Sitemap):
     changefreq="weekly"

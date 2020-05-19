@@ -25,7 +25,7 @@ SECRET_KEY = sercret.CONNECTIONKEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 if os.getenv('GAE_APPLICATION',None):
-    DEBUG=False
+    DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',#for sitemap
 ]
 
-SITE_ID=3
+SITE_ID = 3
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -125,17 +125,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_STORAGE='storages.backends.gcloud.GoogleCloudStorage'
+STATICFILES_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
-DEFAULT_FILE_STORAGE='storages.backends.gcloud.GoogleCloudStorage'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
 
-GS_BUCKET_NAME=sercret.YOURBUCKETNAME
+GS_BUCKET_NAME = sercret.YOURBUCKETNAME
 
 from google.oauth2 import service_account
 
-GS_CREDENTIALS=service_account.Credentials.from_service_account_file(
+GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
     os.path.join(BASE_DIR,'mysiteandship-3e1fa5ac8c78.json')
 )
 
