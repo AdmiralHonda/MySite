@@ -12,6 +12,16 @@
         <meta name="fb:app_id" content="531738907544477"/>
         
         <link rel= "stylesheet" href= "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity= "sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin= "anonymous" > 
+        <script data-ad-client="ca-pub-3952779346887893" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.ls"></script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-163807865-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-163807865-1');
+        </script>
         {%block header%}
         {% endblock %}
     </head>
@@ -21,6 +31,21 @@
                 <div class="col-sm" style="background-color: darkcyan;">
                     <p><p class="h1" style="color: white;"  onclick="location.href='{%url 'MyBlog:index'%}'">AdmiralHonda's LogBook</p><p class="h5" style="color: white;">~アウトドアや釣りの話など~</p></p>
                 </div>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <nav class="navbar navbar-light bg-dark">
+                        <form class="form-inline">
+                          <button class="btn btn-outline-light" style="margin: 1em;"  type="button" onclick="location.href='{%url 'MyBlog:index'%}'">Home</button>
+                          
+                            {%for topic in categorys%}
+                            <button class="btn btn-outline-light" style="margin: 1em;" type="button" onclick="location.href='{%url 'MyBlog:search' topic.slug 1 %}'">{{topic.name}}</button>
+                            {%endfor%}
+                          
+                          <button class="btn btn-outline-light" style="margin: 1em;" type="button" onclick="location.href='{%url 'MyBlog:policy'%}'">サイトポリシー</button>
+                        </form>
+                      </nav>
+                    </div>
             </div>
        {%block content%}
        {% endblock %}

@@ -1,6 +1,4 @@
 runtime: python37
-
-default_expiration: "1h"
   
 instance_class: F1
 handlers:
