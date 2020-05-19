@@ -21,11 +21,9 @@
             <h1 style="text-align: center;">
                 {{article.title}}
             </h1>
-    </div>
-    
-    <div class="col-xs-12">
-            <p><img src="{%static 'img/submit.svg'%}" style="width:2em; height:auto;" align="left">{{article.pub_date|date}}</p>
-            <p><img src="{%static 'img/update.svg'%}" style="width:2em; height:auto;" align="left">{{article.up_date|date}}</p>
+            <br>
+                <p><img src="{%static 'img/submit.svg'%}" style="width:2em; height:auto;" align="left">{{article.pub_date|date}}</p>
+                <p><img src="{%static 'img/update.svg'%}" style="width:2em; height:auto;" align="left">{{article.up_date|date}}</p>
     </div>
 </div>
 
@@ -54,5 +52,34 @@
         </article>
     </div>
 </div>
+
+<div class="row">
+    <br>
+    <br>
+    <div class="col-xs-12">
+        <h1 class="recommend">
+            おすすめの記事
+        </h1>
+    </div>
+</div>
+    <div class="row">
+    {%if recommend%}
+    {% for article in recommend %}
+        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+            <a href="{% url 'MyBlog:blog' article.category.slug article.slug %}">
+                <div class="thumbnail">
+                    <img src="{{article.ogp_img.url}}" style="width: 100%; height:auto;" alt="{{artice.slug}}">
+                </div>
+                <div class="caption">
+                    <p>{{article.title}}</p>
+                </div>
+            </a>
+        </div>
+    {%endfor%}
+    {%else%}
+    {%endif%}
+    </div>
+</div>
+
 
 {%endblock%}

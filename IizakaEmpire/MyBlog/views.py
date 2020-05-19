@@ -9,70 +9,25 @@ class index(ListView):
     model=Article
     template_name='index.html'
     context_object_name='article'
+    paginate_by = 3
 
     def get_context_data(self,**kwargs):
         context=super().get_context_data(**kwargs)
         context['author']=Author.objects.all()
 
         return context
-"""
 
-    try:
-        article=Article.objects.all()
-
-        author=Author.objects.all()
-
-        pagenate=Paginator(article,5)
-
-        if request.GET:
-            p=request.GET.get('page')
-            p=int(p)
-        else:
-            p=1
-
-        putart=pagenate.get_page(p)
-        page_num=pagenate.page_range
-        categ=Category.objects.all()
-        contents={
-            'author':author,
-            'article':putart,
-            'page_num':page_num,
-            'current_page':p,
-            'category':categ,
-        }
-
-        return render(request,'index.html',contents)
-    except (KeyError,Article.DoesNotExist):
-        return Http404("お探しのコンテンツが見つかりませんでした。\n")
-    else:
-        return HttpResponse("障害が発生中です。\nお時間を置いてのアクセスをお願い致します。")
-
-"""
 
 class blog(DetailView):
-
-    model=Article
     template_name='blog.html'
-    context_object_name='article'
+    model=Article
 
-"""
-def blog(request,div,blog_id):
-    
-    putart=get_object_or_404(Article,slug=blog_id)
-    recommend=Article.objects.all()[:4]
+    def get_context_data(self,**kwargs):
+        context=super().get_context_data(**kwargs)
+        context['tags']=context['article'].tags.all()
+        context['recommend']=Article.objects.all()[:4]
+        return context
 
-    tags_list=putart.tags.all()
-    categ=Category.objects.all()
-    contents={
-        'article':putart,
-        'recommend':recommend,
-        'tags':tags_list,
-        'category':categ,
-    }
-
-    return render(request,'blog.html',contents)
-
-"""
 
 def Categorys(request,type,searchtype):
 
