@@ -10,56 +10,132 @@
         <meta proparty="og:site_name" content="AdmiralHondaの航海日誌">
         <meta proparty="og:locale" content="ja_JP">
         {%load static%}
-        <link rel="stylesheet" type="text/css" href="{%static 'blog.css' %}">
         <title>{{article.title}}</title>
+        <style>
+            ul li{
+                font-size: 130%;
+                line-height: 2em;
+              }
+            
+              p{
+                font-size: 130%;
+                line-height: 2em;
+              }
+              a {
+                text-decoration: none;
+                text-emphasis: none;
+                color: black;
+              }
+              a:link,a:visited,a:hover,a:active{
+                color: black;
+                text-decoration: none;
+                text-emphasis: none;
+              }
+              h3{
+                  padding: 0.5em;/*文字周りの余白*/
+                  color: #010101;/*文字色*/
+                  background: #eaf3ff;/*背景色*/
+                  border-bottom: solid 0.5em darkcyan;/*下線*/
+              }
+              h4 {
+                background: linear-gradient(transparent 90%, darkcyan 90%);
+              }
+            
+              @media only screen and (max-width: 767px){
+            
+              img {
+                display: block;
+                max-width: 100%;
+                height: auto;
+                margin-left: auto;
+                margin-right: auto;
+              }
+            
+              }
+            
+              @media only screen and (min-width: 767px),print{
+              img {
+                display: block;
+                max-width: 50%;
+                height: auto;
+                margin-left: auto;
+                margin-right: auto;
+              }
+              }
+              /*見出し周り*/
+            
+              h1 {
+                /*線の種類（二重線）太さ 色*/
+                border-bottom: double 5px darkcyan;
+              }
+            
+              h2 {
+                padding: 0.4em 0.5em;/*文字の上下 左右の余白*/
+                color: #494949;/*文字色*/
+                background: #f4f4f4;/*背景色*/
+                border-left: solid 5px darkcyan;/*左線*/
+                border-bottom: solid 3px #d7d7d7;/*下線*/
+              }
+            
+              h3 {
+                border-bottom: darkcyan;
+              }
+              
+        </style>
 {%endblock%}
 
 {%block content%}
 
 <div class="row">
     <div class="col-xs-12">
+
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{%url 'MyBlog:index'%}">Home</a></li>
+              <li class="breadcrumb-item"><a href="{% url 'MyBlog:search' article.category.slug 1 %}">{{article.category.name}}</a></li>
+              <li class="breadcrumb-item active" aria-current="page">{{article.slug}}</li>
+            </ol>
+            <center>
             <h1 style="text-align: center;">
                 {{article.title}}
             </h1>
+            </center>
             <br>
-                <p><img src="{%static 'img/submit.svg'%}" style="width:2em; height:auto;" align="left">{{article.pub_date|date}}</p>
+            <div>
+                <p><img src="{%static 'img/submit.svg'%}" style="width:2em; height:auto;" align="left">{{article.pub_date|date}}
+                    <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" style="margin:2%;" class="twitter-share-button" data-show-count="false" align="right">ツイート</a>
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                    <a href="https://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" style="margin:2%;" data-hatena-bookmark-layout="touch-counter" data-hatena-bookmark-width="40" data-hatena-bookmark-height="40" title="このエントリーをはてなブックマークに追加" align="right"><img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+                    <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+                </p>
                 <p><img src="{%static 'img/update.svg'%}" style="width:2em; height:auto;" align="left">{{article.up_date|date}}</p>
+            </div>
     </div>
 </div>
 
 <div class="row">
     <div class="col-xs-12">
         {%if article.category%}
-        <button class="btn-square-shadow" onclick="location.href='{% url 'MyBlog:search' article.category.slug 1 %}'">{{article.category.name}}</button>
+        <a href="{% url 'MyBlog:search' article.category.slug 1 %}" class="badge mb-2" style="background-color: darkcyan;color:white;font-size: 120%;line-height: 2em;">{{article.category.name}}</a>
         <br>
         {%else%}
         {%endif%}
         {%if tags %}
         {% for tag in tags %}
-        <button class="btn-square-shadow" onclick="location.href='{% url 'MyBlog:search' tag.slug 2 %}'">{{tag.name}}</button>
+        <a href="{% url 'MyBlog:search' tag.slug 2 %}'" class="badge mr-2 mb-2" style="background-color: darkcyan;color:white;font-size: 120%;line-height: 2em;">{{tag.name}}</a>
         {%endfor%}
         {%else%}
         {%endif%}
-        <div align="right">
-            <!--facebook-->
-            <!--twitter-->
-            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" style="margin:2%;" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-            <a href="https://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" style="margin:2%;" data-hatena-bookmark-layout="touch-counter" data-hatena-bookmark-width="40" data-hatena-bookmark-height="40" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-        </div>
+        
         <article>
             {{article.exchange_markdown|safe}}
         </article>
-    </div>
-</div>
-
-<div class="row">
-    <br>
-    <br>
-    <div class="col-xs-12">
-        <h1 class="recommend">
+        <br>
+        <br>
+        <br>
+        <hr size="10">
+        <p class="h2">
             おすすめの記事
-        </h1>
+        </p>
     </div>
 </div>
     <div class="row">
@@ -67,11 +143,11 @@
     {% for article in recommend %}
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
             <a href="{% url 'MyBlog:blog' article.category.slug article.slug %}">
-                <div class="thumbnail">
-                    <img src="{{article.ogp_img.url}}" style="width: 100%; height:auto;" alt="{{artice.slug}}">
-                </div>
-                <div class="caption">
-                    <p>{{article.title}}</p>
+                <div class="card">
+                    <img src="{{article.ogp_img.url}}" class="bd-placeholder-img card-img-top" style="width: 100%; height:auto;" alt="{{artice.slug}}">
+                    <div class="card-body">
+                        <p class="card-text" style="font-size: 100%;">{{article.title}}</p>
+                    </div>
                 </div>
             </a>
         </div>
