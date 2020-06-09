@@ -61,4 +61,4 @@ def sitepolicy(request):
     return render(request,'static.html',contexts)
 
 def warm_up(request):
-    return HttpResponse(status=200)
+    return HttpResponse("OK")

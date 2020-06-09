@@ -9,6 +9,15 @@
         <meta proparty="og:type" content="{{article.category.slug}}">
         <meta proparty="og:site_name" content="AdmiralHondaの航海日誌">
         <meta proparty="og:locale" content="ja_JP">
+        <!--facebook-->
+        <div id="fb-root"></div>
+            <script>(function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));</script>
         {%load static%}
         <title>{{article.title}}</title>
         <style>
@@ -87,7 +96,7 @@
 {%block content%}
 
 <div class="row">
-    <div class="col-xs-12">
+    <div class="col-sm">
 
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{%url 'MyBlog:index'%}">Home</a></li>
@@ -100,13 +109,25 @@
             </h1>
             </center>
             <br>
-            <div>
-                <p><img src="{%static 'img/submit.svg'%}" style="width:2em; height:auto;" align="left">{{article.pub_date|date}}
-                    <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" style="margin:2%;" class="twitter-share-button" data-show-count="false" align="right">ツイート</a>
+            <!--sns-->
+            <div align='right'>
+                <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" style="margin:2%;" class="twitter-share-button" data-show-count="false" align="right">ツイート</a>
                     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                     <a href="https://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" style="margin:2%;" data-hatena-bookmark-layout="touch-counter" data-hatena-bookmark-width="40" data-hatena-bookmark-height="40" title="このエントリーをはてなブックマークに追加" align="right"><img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
                     <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-                </p>
+                    <div class="fb-share-button" 
+                        data-href="{%url 'MyBlog:blog' article.category.slug article.slug%}" 
+                        data-layout="button_count">
+                    </div>
+                    <div class="line-it-button" style="display: none;" data-lang="ja"
+                     data-type="share-a" data-ver="3" 
+                     data-url="{%url 'MyBlog:blog' article.category.slug article.slug%}"
+                      data-color="default" data-size="small" data-count="true">
+                    </div>
+                    <script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
+            </div>
+            <div>
+                <p><img src="{%static 'img/submit.svg'%}" style="width:2em; height:auto;" align="left">{{article.pub_date|date}}</p>
                 <p><img src="{%static 'img/update.svg'%}" style="width:2em; height:auto;" align="left">{{article.up_date|date}}</p>
             </div>
     </div>

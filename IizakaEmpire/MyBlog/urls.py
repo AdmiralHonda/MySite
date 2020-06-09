@@ -10,6 +10,6 @@ urlpatterns = [
     path('blog/<slug:div>/<slug:slug>/', Blog.as_view(), name='blog'),
     path('search/<slug:kinds>/<int:search_type>/', Categorys.as_view(), name='search'),
     path('sitepolicy/', views.sitepolicy, name='policy'),
-    path('_ah/warmup', views.warm_up, name='warmup'),
+    path('_ah/warmup/', views.warm_up, name='warmup'),
     path('markdownx/', include('markdownx.urls')),
 ]
