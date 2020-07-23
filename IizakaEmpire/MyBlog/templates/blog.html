@@ -142,7 +142,7 @@
         {%endif%}
         {%if tags %}
         {% for tag in tags %}
-        <a href="{% url 'MyBlog:search' tag.slug 2 %}'" class="badge mr-2 mb-2" style="background-color: darkcyan;color:white;font-size: 120%;line-height: 2em;">{{tag.name}}</a>
+        <a href="{% url 'MyBlog:search' tag.slug 2 %}" class="badge mr-2 mb-2" style="background-color: darkcyan;color:white;font-size: 120%;line-height: 2em;">{{tag.name}}</a>
         {%endfor%}
         {%else%}
         {%endif%}
