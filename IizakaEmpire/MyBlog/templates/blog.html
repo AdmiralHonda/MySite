@@ -21,13 +21,45 @@
         {%load static%}
         <title>{{article.title}}</title>
         <style>
-            ul li{
-                font-size: 130%;
-                line-height: 2em;
-              }
-            
+          .box27 {
+            position: relative;
+            margin: 2em 0;
+            padding: 0.5em 1em;
+            border: solid 3px #62c1ce;
+        }
+        ul.cp_list {
+          padding: 0.5em;
+          list-style-type: none;
+        }
+        ul.cp_list li {
+          position: relative;
+          padding: 0.5em 1em 0.5em 2.3em;
+          margin-bottom:5px;
+        }
+        ul.cp_list li:after,
+        ul.cp_list li:before{
+          content:'';
+          position: absolute;
+          border-radius: 50%;
+        }
+        ul.cp_list li:before {
+          top: 50%;
+          left: 0.2em;
+          width: 17px;
+          height: 17px;
+          background: rgba(25,118,210, 1);
+          transform: translateY(-50%);
+        }
+        ul.cp_list li:after {
+          top: 1.1em;
+          left: 0.7em;
+          width: 14px;
+          height: 14px;
+          background: rgba(25,118,210, 0.5);
+        }
+
               p{
-                font-size: 130%;
+                font-size: 100%;
                 line-height: 2em;
               }
               a {
@@ -65,7 +97,7 @@
               @media only screen and (min-width: 767px),print{
               img {
                 display: block;
-                max-width: 50%;
+                max-width: 80%;
                 height: auto;
                 margin-left: auto;
                 margin-right: auto;
@@ -134,7 +166,7 @@
 </div>
 
 <div class="row">
-    <div class="col-xs-12">
+    <div class="col-xs-12 col-md-8 col-lg-8">
         {%if article.category%}
         <a href="{% url 'MyBlog:search' article.category.slug 1 %}" class="badge mb-2" style="background-color: darkcyan;color:white;font-size: 120%;line-height: 2em;">{{article.category.name}}</a>
         <br>
@@ -154,10 +186,23 @@
         <br>
         <br>
         <hr size="10">
-        <p class="h2">
-            おすすめの記事
-        </p>
     </div>
+    <div class="col-sm-12 col-md-4 col-lo-4">
+      <div class="box27">
+          <span class="box-title">この記事の著者</span>
+          {%if author%}
+          <center>
+              <img src="{{author.0.profimg.url}}" style="width:100%;height:auto;">
+              </center>
+              <h4>{{author.0.name}}</h4>
+              {{author.0.exchange_markdown|safe}}
+          {%else%}
+          <p>まだないみたい</p>
+          {%endif%}
+      </div>
+      <a class="twitter-timeline" href="https://twitter.com/AdmiralHonda?ref_src=twsrc%5Etfw">Tweets by AdmiralHonda</a>
+      <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+  </div>
 </div>
     <div class="row">
     {%if recommend%}

@@ -27,6 +27,7 @@ class Blog(DetailView):
         context['tags'] = context['article'].tags.all()
         context['recommend'] = Article.objects.all()[:4]
         context['categorys'] = Category.objects.all()
+        context['author'] = Author.objects.all()
         return context
 
 
