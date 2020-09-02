@@ -2,7 +2,7 @@
 
 {%block header%}
         <meta name="description" content="{{article.meta_description}}">
-        <meta property="og:url" content="{% url 'MyBlog:blog' article.category.slug article.slug %}">
+        <meta property="og:url" content="{{ request.build_absolute_uri }}">
         <meta property="og:title" content="{{article.ogp_title}}">
         <meta proparty="og:description" content="{{article.meta_description}}">
         <meta proparty="og:image" content="{{article.ogp_img.url}}">
