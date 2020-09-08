@@ -1,14 +1,19 @@
 {%extends 'base.html'%}
 
 {%block header%}
-        <meta name="description" content="{{article.meta_description}}">
-        <meta property="og:url" content="{{ request.build_absolute_uri }}">
-        <meta property="og:title" content="{{article.ogp_title}}">
-        <meta proparty="og:description" content="{{article.meta_description}}">
-        <meta proparty="og:image" content="{{article.ogp_img.url}}">
-        <meta proparty="og:type" content="{{article.category.slug}}">
-        <meta proparty="og:site_name" content="AdmiralHondaの航海日誌">
-        <meta proparty="og:locale" content="ja_JP">
+        <meta name="description" content="{{article.meta_description}}" />
+        <meta property="og:url" content="{{ request.build_absolute_uri }}" />
+        <meta property="og:title" content="{{article.ogp_title}}" />
+        <meta proparty="og:description" content="{{article.meta_description}}" />
+        <meta proparty="og:image" content="{{article.ogp_img.url}}" />
+        <meta proparty="og:image:secure_url" content="{{article.ogp_img.url}}" />
+        <meta proparty="og:image:type" content="image/jpeg" />
+        <meta proparty="og:type" content="article" />
+        <meta proparty="og:site_name" content="AdmiralHondaの航海日誌" />
+        <meta proparty="og:locale" content="ja_JP" />
+        <meta name="twitter:image" content="{{article.ogp_img.url}}" />
+        <meta name="facebook:image" content="{{article.ogp_img.url}}" />
+
         <!--facebook-->
         <div id="fb-root"></div>
             <script>(function(d, s, id) {
@@ -27,6 +32,21 @@
             padding: 0.5em 1em;
             border: solid 3px #62c1ce;
         }
+        .box27 .box-title {
+          position: absolute;
+          display: inline-block;
+          top: -27px;
+          left: -3px;
+          padding: 0 9px;
+          height: 25px;
+          line-height: 25px;
+          font-size: 17px;
+          background: #62c1ce;
+          color: #ffffff;
+          font-weight: bold;
+          border-radius: 5px 5px 0 0;
+      }
+      
         ul.cp_list {
           padding: 0.5em;
           list-style-type: none;
