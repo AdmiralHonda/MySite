@@ -1,7 +1,7 @@
 {%extends 'base.html'%}
 
 {% block header %}
-<meta name="description" content="人生という航海の中での日誌。主に釣りのブログです。">
+<meta name="description" content="人生という航海の中での日誌。主に釣りのブログです。" />
 <title>AdmiralHonda's LogBook</title>
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{%static 'index.css' %}">
@@ -12,9 +12,20 @@
 
     <div class="row">
         <div class="col-sm-12 col-md-8">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- Fishing -->
+                <ins class="adsbygoogle"
+                    style="display:block"
+                    data-ad-client="ca-pub-3952779346887893"
+                    data-ad-slot="2902710997"
+                    data-ad-format="auto"
+                    data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
             <h3>記事の一覧</h3>
-            {% if article %}
-                    {% for topic in article %}
+            {% if page_obj %}
+                    {% for topic in page_obj %}
                     <div class="box7">
                         <p>{{topic.pub_date}}</p>
                         <button class="btn-square-shadow" onclick="location.href='{% url 'MyBlog:search' topic.category.slug 1 %}'">{{topic.category.name}}</button>
@@ -33,6 +44,37 @@
                     </div>
                     {% endfor %}
             {%endif%}
+            {%if page_obj %}
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                {%if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{page_obj.previous_page_number}}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                {%endif%}
+                {%if page_obj.paginator.page_range%}
+                    {%for current_page in page_obj.paginator.page_range%}
+                        {%if current_page == page_obj.number %}
+                            <li class="page-item active"><a class="page-link" href="?page={{current_page}}">{{current_page}}</a></li>
+                        {%else%}
+                            <li class="page-item"><a class="page-link" href="?page={{current_page}}">{{current_page}}</a></li>
+                        {%endif%}
+                    {%endfor%}
+                {%endif%}
+                {% if page_obj.has_next %}
+                <li class="page-item">
+                     <a class="page-link" href="?page={{page_obj.next_page_number}}" aria-label="Next">
+                     <span aria-hidden="true">&raquo;</span>
+                     <span class="sr-only">Next</span>
+                     </a>
+                </li>
+                {%endif%}
+                 </ul>
+              </nav>
+            {%endif%}
         </div>
         <div class="col-sm-12 col-md-4">
             <div class="box27">
@@ -47,6 +89,17 @@
                 <p>まだないみたい</p>
                 {%endif%}
             </div>
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- 右側タイムライン上 -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-3952779346887893"
+                data-ad-slot="4110769312"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
             <a class="twitter-timeline" href="https://twitter.com/AdmiralHonda?ref_src=twsrc%5Etfw">Tweets by AdmiralHonda</a>
             <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
         </div>

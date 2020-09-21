@@ -1,30 +1,54 @@
 <!DOCTYPE html>
 <html lang="ja">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <!--config for each SNS -->
         <!--Twitter-->
-        <meta name="twitter:card" content="summary_large_image"/>
+        <meta name="twitter:card" content="summary"/>
         <meta name="twitter:site" content="@AdmiralHonda"/>
         <!--Facebook-->
         <meta name="fb:app_id" content="531738907544477"/>
-        
-        <link rel= "stylesheet" href= "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity= "sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin= "anonymous" > 
         {%block header%}
         {% endblock %}
+        <link rel= "stylesheet" href= "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity= "sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin= "anonymous" > 
+        <script data-ad-client="ca-pub-3952779346887893" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <script data-ad-client="ca-pub-3952779346887893" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-163807865-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-163807865-1');
+        </script>
     </head>
     <body>
         <div class="container">
-            <div class="row">
-                <div class="col-sm" style="background-color: darkcyan;">
-                    <p><p class="h1" style="color: white;"  onclick="location.href='{%url 'MyBlog:index'%}'">AdmiralHonda's LogBook</p><p class="h5" style="color: white;">~アウトドアや釣りの話など~</p></p>
-                </div>
-            </div>
-       {%block content%}
-       {% endblock %}
-       </div>
+            <header style="background-color: darkcyan;" class="jumbotron">
+            <p onclick="location.href='{%url 'MyBlog:index'%}'" style="background-color: darkcyan; color: white;" class="h1 display-4">AdmiralHonda's LogBook</p>
+            <p class="lead" style="color: white;background-color: darkcyan;">~アウトドアや釣りの話など~</p>
+            <hr class="my-4">
+            <nav class="navbar navbar-light bg-dark">
+                <form class="form-inline">
+                  <button class="btn btn-outline-light" style="margin: 0.5em;"  type="button" onclick="location.href='{%url 'MyBlog:index'%}'">Home</button>
+                  
+                    {%for topic in categorys%}
+                    <button class="btn btn-outline-light" style="margin: 0.5em;" type="button" onclick="location.href='{%url 'MyBlog:search' topic.slug 1 %}'">{{topic.name}}</button>
+                    {%endfor%}
+                  
+                  <button class="btn btn-outline-light" style="margin: 0.5em;" type="button" onclick="location.href='{%url 'MyBlog:policy'%}'">サイトポリシー</button>
+                </form>
+              </nav>
+            </header>
+        {%block content%}
+        {% endblock %}
+        <footer>
+            ©2020 admiralhonda.com All Rights Reserved.
+        </footer>
+        </div>
        <script src= "https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity= "sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin= "anonymous" ></script>
        <script src= "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity= "sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin= "anonymous" ></script>
        <script src= "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity= "sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin= "anonymous" ></script> 

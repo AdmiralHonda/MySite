@@ -1,58 +1,283 @@
 {%extends 'base.html'%}
 
 {%block header%}
-        <meta name="description" content="{{article.meta_description}}">
-        <meta property="og:url" content="{% url 'MyBlog:blog' article.category.slug article.slug %}">
-        <meta property="og:title" content="{{article.ogp_title}}">
-        <meta proparty="og:description" content="{{article.meta_description}}">
-        <meta proparty="og:image" content="{{article.ogp_img.url}}">
-        <meta proparty="og:type" content="{{article.category.slug}}">
-        <meta proparty="og:site_name" content="AdmiralHondaの航海日誌">
-        <meta proparty="og:locale" content="ja_JP">
+        <meta name="description" content="{{article.meta_description}}" />
+        <meta property="og:url" content="{{ request.build_absolute_uri }}" />
+        <meta property="og:title" content="{{article.ogp_title}}" />
+        <meta proparty="og:description" content="{{article.meta_description}}" />
+        <meta proparty="og:image" content="{{article.ogp_img.url}}" />
+        <meta proparty="og:image:secure_url" content="{{article.ogp_img.url}}" />
+        <meta proparty="og:image:type" content="image/jpeg" />
+        <meta proparty="og:type" content="article" />
+        <meta proparty="og:site_name" content="AdmiralHondaの航海日誌" />
+        <meta proparty="og:locale" content="ja_JP" />
+        <meta name="twitter:image" content="{{article.ogp_img.url}}" />
+        <meta name="facebook:image" content="{{article.ogp_img.url}}" />
+
+        <!--facebook-->
+        <div id="fb-root"></div>
+            <script>(function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));</script>
         {%load static%}
-        <link rel="stylesheet" type="text/css" href="{%static 'blog.css' %}">
         <title>{{article.title}}</title>
+        <style>
+          .box27 {
+            position: relative;
+            margin: 2em 0;
+            padding: 0.5em 1em;
+            border: solid 3px #62c1ce;
+        }
+        .box27 .box-title {
+          position: absolute;
+          display: inline-block;
+          top: -27px;
+          left: -3px;
+          padding: 0 9px;
+          height: 25px;
+          line-height: 25px;
+          font-size: 17px;
+          background: #62c1ce;
+          color: #ffffff;
+          font-weight: bold;
+          border-radius: 5px 5px 0 0;
+      }
+      
+        ul.cp_list {
+          padding: 0.5em;
+          list-style-type: none;
+        }
+        ul.cp_list li {
+          position: relative;
+          padding: 0.5em 1em 0.5em 2.3em;
+          margin-bottom:5px;
+        }
+        ul.cp_list li:after,
+        ul.cp_list li:before{
+          content:'';
+          position: absolute;
+          border-radius: 50%;
+        }
+        ul.cp_list li:before {
+          top: 50%;
+          left: 0.2em;
+          width: 17px;
+          height: 17px;
+          background: rgba(25,118,210, 1);
+          transform: translateY(-50%);
+        }
+        ul.cp_list li:after {
+          top: 1.1em;
+          left: 0.7em;
+          width: 14px;
+          height: 14px;
+          background: rgba(25,118,210, 0.5);
+        }
+
+              p{
+                font-size: 100%;
+                line-height: 2em;
+              }
+              a {
+                text-decoration: none;
+                text-emphasis: none;
+                color: black;
+              }
+              a:link,a:visited,a:hover,a:active{
+                color: black;
+                text-decoration: none;
+                text-emphasis: none;
+              }
+              h3{
+                  padding: 0.5em;/*文字周りの余白*/
+                  color: #010101;/*文字色*/
+                  background: #eaf3ff;/*背景色*/
+                  border-bottom: solid 0.5em darkcyan;/*下線*/
+              }
+              h4 {
+                background: linear-gradient(transparent 90%, darkcyan 90%);
+              }
+            
+              @media only screen and (max-width: 767px){
+            
+              img {
+                display: block;
+                max-width: 100%;
+                height: auto;
+                margin-left: auto;
+                margin-right: auto;
+              }
+            
+              }
+            
+              @media only screen and (min-width: 767px),print{
+              img {
+                display: block;
+                max-width: 80%;
+                height: auto;
+                margin-left: auto;
+                margin-right: auto;
+              }
+              }
+              /*見出し周り*/
+            
+              h1 {
+                /*線の種類（二重線）太さ 色*/
+                border-bottom: double 5px darkcyan;
+              }
+            
+              h2 {
+                padding: 0.4em 0.5em;/*文字の上下 左右の余白*/
+                color: #494949;/*文字色*/
+                background: #f4f4f4;/*背景色*/
+                border-left: solid 5px darkcyan;/*左線*/
+                border-bottom: solid 3px #d7d7d7;/*下線*/
+              }
+            
+              h3 {
+                border-bottom: darkcyan;
+              }
+              
+        </style>
 {%endblock%}
 
 {%block content%}
 
 <div class="row">
-    <div class="col-xs-12">
+    <div class="col">
+
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="{%url 'MyBlog:index'%}">Home</a></li>
+              <li class="breadcrumb-item"><a href="{% url 'MyBlog:search' article.category.slug 1 %}">{{article.category.name}}</a></li>
+              <li class="breadcrumb-item active" aria-current="page">{{article.slug}}</li>
+            </ol>
+            <center>
             <h1 style="text-align: center;">
                 {{article.title}}
             </h1>
-    </div>
-    
-    <div class="col-xs-12">
-            <p><img src="{%static 'img/submit.svg'%}" style="width:2em; height:auto;" align="left">{{article.pub_date|date}}</p>
-            <p><img src="{%static 'img/update.svg'%}" style="width:2em; height:auto;" align="left">{{article.up_date|date}}</p>
+            </center>
+            <br>
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- Fishing -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-3952779346887893"
+                data-ad-slot="2902710997"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+            <!--sns-->
+            <div align='right'>
+                <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" style="margin:2%;" class="twitter-share-button" data-show-count="false" align="right">ツイート</a>
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                    <a href="https://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" style="margin:2%;" data-hatena-bookmark-layout="touch-counter" data-hatena-bookmark-width="40" data-hatena-bookmark-height="40" title="このエントリーをはてなブックマークに追加" align="right"><img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+                    <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+                    <div class="fb-share-button" 
+                        data-href="{%url 'MyBlog:blog' article.category.slug article.slug%}" 
+                        data-layout="button_count">
+                    </div>
+                    <div class="line-it-button" style="display: none;" data-lang="ja"
+                     data-type="share-a" data-ver="3" 
+                     data-url="{%url 'MyBlog:blog' article.category.slug article.slug%}"
+                      data-color="default" data-size="small" data-count="true">
+                    </div>
+                    <script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
+            </div>
+            <div>
+                <p><img src="{%static 'img/submit.svg'%}" style="width:2em; height:auto;" align="left">{{article.pub_date|date}}</p>
+                <p><img src="{%static 'img/update.svg'%}" style="width:2em; height:auto;" align="left">{{article.up_date|date}}</p>
+            </div>
     </div>
 </div>
 
 <div class="row">
-    <div class="col-xs-12">
+    <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
         {%if article.category%}
-        <button class="btn-square-shadow" onclick="location.href='{% url 'MyBlog:search' article.category.slug 1 %}'">{{article.category.name}}</button>
+        <a href="{% url 'MyBlog:search' article.category.slug 1 %}" class="badge mb-2" style="background-color: darkcyan;color:white;font-size: 120%;line-height: 2em;">{{article.category.name}}</a>
         <br>
         {%else%}
         {%endif%}
         {%if tags %}
         {% for tag in tags %}
-        <button class="btn-square-shadow" onclick="location.href='{% url 'MyBlog:search' tag.slug 2 %}'">{{tag.name}}</button>
+        <a href="{% url 'MyBlog:search' tag.slug 2 %}" class="badge mr-2 mb-2" style="background-color: darkcyan;color:white;font-size: 120%;line-height: 2em;">{{tag.name}}</a>
         {%endfor%}
         {%else%}
         {%endif%}
-        <div align="right">
-            <!--facebook-->
-            <!--twitter-->
-            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" style="margin:2%;" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-            <a href="https://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" style="margin:2%;" data-hatena-bookmark-layout="touch-counter" data-hatena-bookmark-width="40" data-hatena-bookmark-height="40" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-        </div>
+        
         <article>
             {{article.exchange_markdown|safe}}
         </article>
+        <br>
+        <br>
+        <br>
+    </div>
+    <div class="col-auto col-sm-auto col-md-4 col-lg-4 col-xl-4">
+      <div class="box27">
+          <span class="box-title">この記事の著者</span>
+          {%if author%}
+          <center>
+              <img src="{{author.0.profimg.url}}" style="width:100%;height:auto;">
+              </center>
+              <h4>{{author.0.name}}</h4>
+              {{author.0.exchange_markdown|safe}}
+          {%else%}
+          <p>まだないみたい</p>
+          {%endif%}
+      </div>
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <!-- 右側タイムライン上 -->
+      <ins class="adsbygoogle"
+          style="display:block"
+          data-ad-client="ca-pub-3952779346887893"
+          data-ad-slot="4110769312"
+          data-ad-format="auto"
+          data-full-width-responsive="true"></ins>
+      <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+      <a class="twitter-timeline" href="https://twitter.com/AdmiralHonda?ref_src=twsrc%5Etfw">Tweets by AdmiralHonda</a>
+      <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+  </div>
+</div>
+    <div class="row">
+      <hr size="10">
+    {%if recommend%}
+    <div class="col-12">
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <!-- Fishing -->
+      <ins class="adsbygoogle"
+          style="display:block"
+          data-ad-client="ca-pub-3952779346887893"
+          data-ad-slot="2902710997"
+          data-ad-format="auto"
+          data-full-width-responsive="true"></ins>
+      <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+      <p class="h3">他の記事<br></p>
+    </div>
+    {% for article in recommend %}
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 text-center">
+              <div class="card">
+                <h5 class="card-title">{{article.title}}</h5>
+                  <img src="{{article.ogp_img.url}}" class="bd-placeholder-img card-img-top" style="width: 100%; height:auto;" alt="{{artice.slug}}">
+                  <div class="card-body">
+                      <p class="card-text" style="font-size: 100%;">{{article.meta_description}}</p>
+                      <a href="{% url 'MyBlog:blog' article.category.slug article.slug %}" class="btn btn-primary">見てみる</a>
+                  </div>
+              </div>
+        </div>
+    {%endfor%}
+    {%else%}
+    {%endif%}
     </div>
 </div>
+
 
 {%endblock%}
