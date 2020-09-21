@@ -148,7 +148,7 @@
 {%block content%}
 
 <div class="row">
-    <div class="col-12">
+    <div class="col">
 
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="{%url 'MyBlog:index'%}">Home</a></li>
@@ -186,7 +186,7 @@
 </div>
 
 <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+    <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
         {%if article.category%}
         <a href="{% url 'MyBlog:search' article.category.slug 1 %}" class="badge mb-2" style="background-color: darkcyan;color:white;font-size: 120%;line-height: 2em;">{{article.category.name}}</a>
         <br>
@@ -206,7 +206,7 @@
         <br>
         <br>
     </div>
-    <div class="col-xs-12 col-sm-12 col-md-4 col-lo-4">
+    <div class="col-auto col-sm-auto col-md-4 col-lg-4 col-xl-4">
       <div class="box27">
           <span class="box-title">この記事の著者</span>
           {%if author%}
@@ -227,14 +227,14 @@
       <hr size="10">
     {%if recommend%}
     <div class="col-12">
-      <p class="h3">他の記事</p>
+      <p class="h3">他の記事<br></p>
     </div>
     {% for article in recommend %}
-        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 text-center">
               <div class="card">
+                <h5 class="card-title">{{article.title}}</h5>
                   <img src="{{article.ogp_img.url}}" class="bd-placeholder-img card-img-top" style="width: 100%; height:auto;" alt="{{artice.slug}}">
                   <div class="card-body">
-                      <h5 class="card-title">{{article.title}}</h5>
                       <p class="card-text" style="font-size: 100%;">{{article.meta_description}}</p>
                       <a href="{% url 'MyBlog:blog' article.category.slug article.slug %}" class="btn btn-primary">見てみる</a>
                   </div>

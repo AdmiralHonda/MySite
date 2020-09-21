@@ -49,6 +49,7 @@ INSTALLED_APPS = [
 SITE_ID = 3
 
 MIDDLEWARE = [
+    'compression_middleware.middleware.CompressionMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

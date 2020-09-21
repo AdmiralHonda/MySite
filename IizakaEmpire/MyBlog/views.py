@@ -3,7 +3,6 @@ from django.core.paginator import Paginator
 from django.http import HttpResponse, Http404
 from django.views.generic import TemplateView, ListView, DetailView
 from .models import Article, Author, Category, Policy,Tag
-# Create your views here.
 
 class Index(ListView):
     model = Article
