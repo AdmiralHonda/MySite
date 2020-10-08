@@ -137,6 +137,5 @@ GS_BUCKET_NAME = sercret.YOURBUCKETNAME
 from google.oauth2 import service_account
 
 GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
-    os.path.join(BASE_DIR,'mysiteandship-3e1fa5ac8c78.json')
+    os.path.join(BASE_DIR,'mysiteandship-1f606245abce.json')
 )
-

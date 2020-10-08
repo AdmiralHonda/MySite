@@ -19,16 +19,16 @@ class Tag(models.Model):
         return self.name
 
 class Article(models.Model):
-    slug=models.SlugField(max_length=16,unique=True)
-    category=models.ForeignKey(Category,on_delete=models.CASCADE)
-    tags=models.ManyToManyField(Tag)
-    title=models.CharField(max_length=64)
-    meta_description=models.CharField(max_length=64)
-    ogp_title=models.CharField(max_length=32)
-    ogp_img=models.ImageField(upload_to='ogp_img')
-    pub_date=models.DateTimeField('作成日時',auto_now_add=True)
-    up_date=models.DateTimeField('更新日時',auto_now=True)
-    contents=MarkdownxField('Contents',help_text='box9 is note box<div>\n outline is list <ul class="outline"><li><h4></h4></li></ul>')
+    slug = models.SlugField(max_length=16,unique=True)
+    category = models.ForeignKey(Category,on_delete=models.CASCADE)
+    tags = models.ManyToManyField(Tag)
+    title = models.CharField(max_length=64)
+    meta_description = models.CharField(max_length=64)
+    ogp_title = models.CharField(max_length=32)
+    ogp_img = models.ImageField(upload_to='ogp_img')
+    pub_date = models.DateTimeField('作成日時',auto_now_add=True)
+    up_date = models.DateTimeField('更新日時',auto_now=True)
+    contents = MarkdownxField('Contents',help_text='box9 is note box<div>\n outline is list <ul class="outline"><li><h4></h4></li></ul>')
     
     def __str__(self):
         return self.title

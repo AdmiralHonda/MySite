@@ -27,26 +27,26 @@
         <title>{{article.title}}</title>
         <style>
           .box27 {
+            background: whitesmoke;/*背景色*/
             position: relative;
             margin: 2em 0;
             padding: 0.5em 1em;
             border: solid 3px #62c1ce;
-        }
-        .box27 .box-title {
-          position: absolute;
-          display: inline-block;
-          top: -27px;
-          left: -3px;
-          padding: 0 9px;
-          height: 25px;
-          line-height: 25px;
-          font-size: 17px;
-          background: #62c1ce;
-          color: #ffffff;
-          font-weight: bold;
-          border-radius: 5px 5px 0 0;
-      }
-      
+          }
+          .box27 .box-title {
+            position: absolute;
+            display: inline-block;
+            top: -27px;
+            left: -3px;
+            padding: 0 9px;
+            height: 25px;
+            line-height: 25px;
+            font-size: 17px;
+            background: #62c1ce;
+            color: #ffffff;
+            font-weight: bold;
+            border-radius: 5px 5px 0 0;
+          }
         ul.cp_list {
           padding: 0.5em;
           list-style-type: none;
@@ -77,7 +77,6 @@
           height: 14px;
           background: rgba(25,118,210, 0.5);
         }
-
               p{
                 font-size: 100%;
                 line-height: 2em;
@@ -149,16 +148,16 @@
 
 <div class="row">
     <div class="col">
-
-            <ol class="breadcrumb">
+            <ol class="breadcrumb my-2 rounded">
               <li class="breadcrumb-item"><a href="{%url 'MyBlog:index'%}">Home</a></li>
               <li class="breadcrumb-item"><a href="{% url 'MyBlog:search' article.category.slug 1 %}">{{article.category.name}}</a></li>
               <li class="breadcrumb-item active" aria-current="page">{{article.slug}}</li>
             </ol>
-            <center>
+            <center class="rounded" style="background-color: whitesmoke;">
             <h1 style="text-align: center;">
-                {{article.title}}
+              {{article.ogp_title}}
             </h1>
+            <img src="{{article.ogp_img.url}}">
             </center>
             <br>
             <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -172,32 +171,15 @@
             <script>
                 (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
-            <!--sns-->
-            <div align='right'>
-                <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" style="margin:2%;" class="twitter-share-button" data-show-count="false" align="right">ツイート</a>
-                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-                    <a href="https://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" style="margin:2%;" data-hatena-bookmark-layout="touch-counter" data-hatena-bookmark-width="40" data-hatena-bookmark-height="40" title="このエントリーをはてなブックマークに追加" align="right"><img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
-                    <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-                    <div class="fb-share-button" 
-                        data-href="{%url 'MyBlog:blog' article.category.slug article.slug%}" 
-                        data-layout="button_count">
-                    </div>
-                    <div class="line-it-button" style="display: none;" data-lang="ja"
-                     data-type="share-a" data-ver="3" 
-                     data-url="{%url 'MyBlog:blog' article.category.slug article.slug%}"
-                      data-color="default" data-size="small" data-count="true">
-                    </div>
-                    <script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
-            </div>
-            <div>
-                <p><img src="{%static 'img/submit.svg'%}" style="width:2em; height:auto;" align="left">{{article.pub_date|date}}</p>
-                <p><img src="{%static 'img/update.svg'%}" style="width:2em; height:auto;" align="left">{{article.up_date|date}}</p>
-            </div>
     </div>
 </div>
 
-<div class="row">
-    <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
+<div class="row rounded">
+    <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8 rounded" style="background-color: whitesmoke;">
+      <div>
+        <p><img src="{%static 'img/submit.svg'%}" style="width:2em; height:auto;" align="left">{{article.pub_date|date}}</p>
+        <p><img src="{%static 'img/update.svg'%}" style="width:2em; height:auto;" align="left">{{article.up_date|date}}</p>
+    </div>
         {%if article.category%}
         <a href="{% url 'MyBlog:search' article.category.slug 1 %}" class="badge mb-2" style="background-color: darkcyan;color:white;font-size: 120%;line-height: 2em;">{{article.category.name}}</a>
         <br>
@@ -216,6 +198,34 @@
         <br>
         <br>
         <br>
+        <div align='right'>
+          <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" style="margin:2%;" class="twitter-share-button" data-show-count="false" align="right">ツイート</a>
+              <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+              <a href="https://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" style="margin:2%;" data-hatena-bookmark-layout="touch-counter" data-hatena-bookmark-width="40" data-hatena-bookmark-height="40" title="このエントリーをはてなブックマークに追加" align="right"><img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+              <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+              <div class="fb-share-button" 
+                  data-href="{%url 'MyBlog:blog' article.category.slug article.slug%}" 
+                  data-layout="button_count">
+              </div>
+              <div class="line-it-button" style="display: none;" data-lang="ja"
+               data-type="share-a" data-ver="3" 
+               data-url="{%url 'MyBlog:blog' article.category.slug article.slug%}"
+                data-color="default" data-size="small" data-count="true">
+              </div>
+              <script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
+      </div>
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <!-- Fishing -->
+      <ins class="adsbygoogle"
+          style="display:block"
+          data-ad-client="ca-pub-3952779346887893"
+          data-ad-slot="2902710997"
+          data-ad-format="auto"
+          data-full-width-responsive="true"></ins>
+      <script>
+          (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+
     </div>
     <div class="col-auto col-sm-auto col-md-4 col-lg-4 col-xl-4">
       <div class="box27">
@@ -248,22 +258,11 @@
     <div class="row">
       <hr size="10">
     {%if recommend%}
-    <div class="col-12">
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-      <!-- Fishing -->
-      <ins class="adsbygoogle"
-          style="display:block"
-          data-ad-client="ca-pub-3952779346887893"
-          data-ad-slot="2902710997"
-          data-ad-format="auto"
-          data-full-width-responsive="true"></ins>
-      <script>
-          (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
-      <p class="h3">他の記事<br></p>
+    <div class="col-12 my-1 rounded" style="background-color: whitesmoke;" rounded>
+      <p class="h3 rounded text-center">他の記事<br></p>
     </div>
     {% for article in recommend %}
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 text-center">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 rounded text-center my-auto">
               <div class="card">
                 <h5 class="card-title">{{article.title}}</h5>
                   <img src="{{article.ogp_img.url}}" class="bd-placeholder-img card-img-top" style="width: 100%; height:auto;" alt="{{artice.slug}}">

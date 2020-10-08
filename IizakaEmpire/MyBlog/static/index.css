@@ -77,6 +77,7 @@
   }
 
   .box27 {
+    background: whitesmoke;/*背景色*/
     position: relative;
     margin: 2em 0;
     padding: 0.5em 1em;

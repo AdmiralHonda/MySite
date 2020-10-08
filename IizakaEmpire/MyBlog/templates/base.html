@@ -25,27 +25,26 @@
             gtag('config', 'UA-163807865-1');
         </script>
     </head>
-    <body>
+    <body style="background-color: lightgray;">
         <div class="container">
-            <header style="background-color: darkcyan;" class="jumbotron">
+            <header style="background-color: darkcyan;" class="jumbotron rounded">
             <p onclick="location.href='{%url 'MyBlog:index'%}'" style="background-color: darkcyan; color: white;" class="h1 display-4">AdmiralHonda's LogBook</p>
             <p class="lead" style="color: white;background-color: darkcyan;">~アウトドアや釣りの話など~</p>
-            <hr class="my-4">
-            <nav class="navbar navbar-light bg-dark">
-                <form class="form-inline">
-                  <button class="btn btn-outline-light" style="margin: 0.5em;"  type="button" onclick="location.href='{%url 'MyBlog:index'%}'">Home</button>
-                  
-                    {%for topic in categorys%}
-                    <button class="btn btn-outline-light" style="margin: 0.5em;" type="button" onclick="location.href='{%url 'MyBlog:search' topic.slug 1 %}'">{{topic.name}}</button>
-                    {%endfor%}
-                  
-                  <button class="btn btn-outline-light" style="margin: 0.5em;" type="button" onclick="location.href='{%url 'MyBlog:policy'%}'">サイトポリシー</button>
-                </form>
-              </nav>
             </header>
+            <nav class="navbar navbar-light bg-dark rounded">
+              <form class="form-inline">
+                <button class="btn btn-outline-light" style="margin: 0.5em;"  type="button" onclick="location.href='{%url 'MyBlog:index'%}'">Home</button>
+                
+                  {%for topic in categorys%}
+                  <button class="btn btn-outline-light" style="margin: 0.5em;" type="button" onclick="location.href='{%url 'MyBlog:search' topic.slug 1 %}'">{{topic.name}}</button>
+                  {%endfor%}
+                
+                <button class="btn btn-outline-light" style="margin: 0.5em;" type="button" onclick="location.href='{%url 'MyBlog:policy'%}'">サイトポリシー</button>
+              </form>
+            </nav>
         {%block content%}
         {% endblock %}
-        <footer>
+        <footer class="text-center rounded" style="background-color: darkcyan;color: white;">
             ©2020 admiralhonda.com All Rights Reserved.
         </footer>
         </div>
