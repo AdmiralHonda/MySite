@@ -6,16 +6,34 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <!--config for each SNS -->
         <!--Twitter-->
-        <meta name="twitter:card" content="summary"/>
+        <meta name="twitter:card" content="summary_large_image"/>
         <meta name="twitter:site" content="@AdmiralHonda"/>
+        <meta name="twitter:widgets:theme" content="dark" />
         <!--Facebook-->
         <meta name="fb:app_id" content="531738907544477"/>
         {%block header%}
         {% endblock %}
+        {% load static %}
+        <link rel="apple-touch-icon" sizes="57x57" href="{% static '/img/IMG_0459.png' %}">
+        <link rel="apple-touch-icon" sizes="60x60" href="{% static '/img/IMG_0459.png' %}">
+        <link rel="apple-touch-icon" sizes="72x72" href="{% static '/img/IMG_0459.png' %}">
+        <link rel="apple-touch-icon" sizes="76x76" href="{% static '/img/IMG_0459.png' %}">
+        <link rel="apple-touch-icon" sizes="114x114" href="{% static '/img/IMG_0459.png' %}">
+        <link rel="apple-touch-icon" sizes="120x120" href="{% static '/img/IMG_0459.png' %}">
+        <link rel="apple-touch-icon" sizes="144x144" href="{% static '/img/IMG_0459.png' %}">
+        <link rel="apple-touch-icon" sizes="152x152" href="{% static '/img/IMG_0459.png' %}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static '/img/IMG_0459.png' %}">
+        <link rel="icon" type="image/png" sizes="192x192"  href="{% static '/img/IMG_0459.png' %}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{% static '/img/IMG_0459.png' %}">
+        <link rel="icon" type="image/png" sizes="96x96" href="{% static '/img/IMG_0459.png' %}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{% static '/img/IMG_0459.png' %}">
+        <link rel="manifest" href="/manifest.json">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="{% static '/img/IMG_0459.png' %}">
+        <meta name="theme-color" content="#ffffff">
+
         <link rel= "stylesheet" href= "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity= "sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin= "anonymous" > 
         <script data-ad-client="ca-pub-3952779346887893" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <script data-ad-client="ca-pub-3952779346887893" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-163807865-1"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
@@ -25,13 +43,13 @@
             gtag('config', 'UA-163807865-1');
         </script>
     </head>
-    <body style="background-color: lightgray;">
+    <body>
         <div class="container">
-            <header style="background-color: darkcyan;" class="jumbotron rounded">
+            <header style="background-color: darkcyan;" class="jumbotron rounded" role="banner">
             <p onclick="location.href='{%url 'MyBlog:index'%}'" style="background-color: darkcyan; color: white;" class="h1 display-4">AdmiralHonda's LogBook</p>
             <p class="lead" style="color: white;background-color: darkcyan;">~アウトドアや釣りの話など~</p>
             </header>
-            <nav class="navbar navbar-light bg-dark rounded">
+            <nav class="navbar navbar-light bg-dark rounded" role="navigation">
               <form class="form-inline">
                 <button class="btn btn-outline-light" style="margin: 0.5em;"  type="button" onclick="location.href='{%url 'MyBlog:index'%}'">Home</button>
                 
@@ -44,7 +62,7 @@
             </nav>
         {%block content%}
         {% endblock %}
-        <footer class="text-center rounded" style="background-color: darkcyan;color: white;">
+        <footer class="text-center rounded" role="contentinfo" style="background-color: darkcyan;color: white;">
             ©2020 admiralhonda.com All Rights Reserved.
         </footer>
         </div>

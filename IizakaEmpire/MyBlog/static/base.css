@@ -1,3 +1,17 @@
+body{
+  background-color: lightgray !important;
+}
+
+.back_color{
+  background-color: whitesmoke;
+}
+@media (prefers-color-scheme: dark) {
+  .back_color{
+   background-color: #0a2814;
+   color: white;
+  }
+}
+
 .box7{
     padding: 0.5em 1em;
     margin: 2em 0;
@@ -101,28 +115,6 @@
     margin: 0; 
     padding: 0;
 }
-
-@media only screen and (max-width: 767px){
-
-  img {
-    display: block;
-    max-width: 60%;
-    height: auto;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  }
-
-  @media only screen and (min-width: 767px),print{
-  img {
-    display: block;
-    max-width: 50%;
-    height: auto;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  }
   div a {
     text-decoration: none;
     text-emphasis: none;

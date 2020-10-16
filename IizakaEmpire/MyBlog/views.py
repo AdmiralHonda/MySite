@@ -8,7 +8,7 @@ class Index(ListView):
     model = Article
     template_name = 'index.html'
     context_object_name = 'article'
-    paginate_by = 5
+    paginate_by = 10
 
     def get_context_data(self,**kwargs):
         context = super().get_context_data(**kwargs)
@@ -33,7 +33,7 @@ class Blog(DetailView):
 class Categorys(ListView):
     
     template_name = 'index.html'
-    paginate_by = 3
+    paginate_by = 5
     context_object_name = 'article'
 
     def get_context_data(self, **kwargs):
