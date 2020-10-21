@@ -5,12 +5,7 @@ body{
 .back_color{
   background-color: whitesmoke;
 }
-@media (prefers-color-scheme: dark) {
-  .back_color{
-   background-color: #0a2814;
-   color: white;
-  }
-}
+
 
 .box7{
     padding: 0.5em 1em;

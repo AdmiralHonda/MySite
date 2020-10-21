@@ -16,15 +16,6 @@
         <meta name="facebook:image" content="{{article.ogp_img.url}}" />
         {% load static %}
         <link rel="stylesheet" type="text/css" href="{%static 'base.css' %}">
-        <!--facebook-->
-        <div id="fb-root"></div>
-            <script>(function(d, s, id) {
-                var js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id)) return;
-                js = d.createElement(s); js.id = id;
-                js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
-                fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));</script>
         <title>{{article.title}}</title>
         <style>
           ul.cp_list {
@@ -216,16 +207,20 @@
       <p class="h3 rounded text-center">他の記事<br></p>
     </div>
     {% for article in recommend %}
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 rounded text-center my-auto" role="complementary">
-              <div class="card">
-                <h5 class="card-title">{{article.title}}</h5>
-                  <img src="{{article.ogp_img.url}}" class="bd-placeholder-img card-img-top back_color" style="width: auto; height:auto;" alt="{{artice.slug}}">
-                  <div class="card-body">
-                      <p class="card-text" style="font-size: 100%;">{{article.meta_description}}</p>
-                      <a href="{% url 'MyBlog:blog' article.category.slug article.slug %}" class="btn btn-primary">見てみる</a>
-                  </div>
-              </div>
+    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 rounded">
+      <div class="card flex-md-row mb-4 shadow-sm h-md-250">
+        <div class="card-body d-flex flex-column align-items-start">
+          <a href="{% url 'MyBlog:search' article.category.slug 1 %}" class="badge mb-2" style="background-color: darkcyan;color:white;font-size: 120%;line-height: 2em;">{{article.category.name}}</a>
+          <h3 class="mb-0">
+            <a class="text-dark" href="{%url 'MyBlog:blog' article.category.slug article.slug %}">{{article.ogp_title}}</a>
+          </h3>
+          <div class="mb-1 text-muted">{{article.pub_date|date}}</div>
+          <img class="card-img flex-auto" alt="Thumbnail" src="{{article.ogp_img.url}}"  data-holder-rendered="true">
+          <p class="card-text mb-auto">{{article.meta_description}}</p>
+          <a class="text-white btn btn-primary" href="{%url 'MyBlog:blog' article.category.slug article.slug %}">このページへ行く</a>
         </div>
+      </div>
+    </div>
     {%endfor%}
     {%else%}
     {%endif%}
