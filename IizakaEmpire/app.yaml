@@ -5,8 +5,6 @@ instance_class: F1
 inbound_services:
 - warmup
 
-entrypoint: uwsgi --http-socket :8080 --wsgi-file main.py --callable app --master --processes 1 --threads 2
-
 env_variables:
   DJANGO_SETTINGS_MODULE: "IizakaEmpire.settings"
 

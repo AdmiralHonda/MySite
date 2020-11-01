@@ -119,10 +119,9 @@
             <h1 style="text-align: center;">
               {{article.ogp_title}}
             </h1>
-            <img src="{{article.ogp_img.url}}" alt="title">
+            <img class="img-fluid img-thumbnail" src="{{article.ogp_img.url}}" alt="title">
             </center>
             <br>
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
             <!-- Fishing -->
             <ins class="adsbygoogle"
                 style="display:block"
@@ -137,19 +136,19 @@
 </div>
 
 <div class="row rounded">
-    <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8 rounded back_color">
+    <div class="col-12 col-md-8 rounded back_color">
       <div>
         <p><img src="{%static 'img/submit.svg'%}" style="width:2em; height:auto;" align="left">{{article.pub_date|date}}</p>
         <p><img src="{%static 'img/update.svg'%}" style="width:2em; height:auto;" align="left">{{article.up_date|date}}</p>
     </div>
         {%if article.category%}
-        <a href="{% url 'MyBlog:search' article.category.slug 1 %}" class="badge mb-2" style="background-color: darkcyan;color:white;font-size: 120%;line-height: 2em;">{{article.category.name}}</a>
+        <a href="{% url 'MyBlog:search' article.category.slug 1 %}" class=" btn btn-info mb-2 text-white">{{article.category.name}}</a>
         <br>
         {%else%}
         {%endif%}
         {%if tags %}
         {% for tag in tags %}
-        <a href="{% url 'MyBlog:search' tag.slug 2 %}" class="badge mr-2 mb-2" style="background-color: darkcyan;color:white;font-size: 120%;line-height: 2em;">{{tag.name}}</a>
+        <a href="{% url 'MyBlog:search' tag.slug 2 %}" class="btn btn-info mr-2 mb-2 text-white">{{tag.name}}</a>
         {%endfor%}
         {%else%}
         {%endif%}
@@ -161,7 +160,6 @@
         <br>
         <br>
         
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
       <!-- Fishing -->
       <ins class="adsbygoogle"
           style="display:block"
@@ -174,20 +172,19 @@
       </script>
 
     </div>
-    <div class="col-auto col-sm-auto col-md-4 col-lg-4 col-xl-4">
+    <div class="col-auto col-md-4">
       <div class="box27">
           <span class="box-title">この記事の著者</span>
           {%if author%}
           <center>
-              <img src="{{author.0.profimg.url}}" style="width:100%;height:auto;">
+              <img src="{{author.profimg.url}}" class="img-thumbnail img-fluid">
               </center>
-              <h4>{{author.0.name}}</h4>
-              {{author.0.exchange_markdown|safe}}
+              <h4>{{author.name}}</h4>
+              {{author.exchange_markdown|safe}}
           {%else%}
           <p>まだないみたい</p>
           {%endif%}
       </div>
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
       <!-- 右側タイムライン上 -->
       <ins class="adsbygoogle"
           style="display:block"
@@ -207,15 +204,15 @@
       <p class="h3 rounded text-center">他の記事<br></p>
     </div>
     {% for article in recommend %}
-    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 rounded">
+    <div class="col-12 col-md-6 rounded">
       <div class="card flex-md-row mb-4 shadow-sm h-md-250">
         <div class="card-body d-flex flex-column align-items-start">
-          <a href="{% url 'MyBlog:search' article.category.slug 1 %}" class="badge mb-2" style="background-color: darkcyan;color:white;font-size: 120%;line-height: 2em;">{{article.category.name}}</a>
+          <a href="{% url 'MyBlog:search' article.category.slug 1 %}" class="btn btn-info mb-2">{{article.category.name}}</a>
           <h3 class="mb-0">
             <a class="text-dark" href="{%url 'MyBlog:blog' article.category.slug article.slug %}">{{article.ogp_title}}</a>
           </h3>
           <div class="mb-1 text-muted">{{article.pub_date|date}}</div>
-          <img class="card-img flex-auto" alt="Thumbnail" src="{{article.ogp_img.url}}"  data-holder-rendered="true">
+          <img class="card-img flex-auto img-fluid img-thumbnail" alt="Thumbnail" src="{{article.ogp_img.url}}"  data-holder-rendered="true">
           <p class="card-text mb-auto">{{article.meta_description}}</p>
           <a class="text-white btn btn-primary" href="{%url 'MyBlog:blog' article.category.slug article.slug %}">このページへ行く</a>
         </div>

@@ -13,7 +13,6 @@ class Index(ListView):
     def get_context_data(self,**kwargs):
         context = super().get_context_data(**kwargs)
         context['author'] = Author.objects.all()
-        context['categorys'] = Category.objects.all()
         return context
 
 
@@ -25,8 +24,7 @@ class Blog(DetailView):
         context = super().get_context_data(**kwargs)
         context['tags'] = context['article'].tags.all()
         context['recommend'] = Article.objects.all()[:4]
-        context['categorys'] = Category.objects.all()
-        context['author'] = Author.objects.all()
+        context['author'] = get_object_or_404(Author, id=1)
         return context
 
 
@@ -38,7 +36,7 @@ class Categorys(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['author'] = Author.objects.all()
+        context['author'] = get_object_or_404(Author, id=1)
         context['categorys'] = Category.objects.all()
         return context
 

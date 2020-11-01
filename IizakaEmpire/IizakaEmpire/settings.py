@@ -44,12 +44,14 @@ INSTALLED_APPS = [
     'django_cleanup',#for rm image
     'django.contrib.sites',#for sitemap←if you manage single site,this app cause error 'Does't exist /admin/login'
     'django.contrib.sitemaps',#for sitemap
+    'silk'
 ]
 
 SITE_ID = 3
 
 MIDDLEWARE = [
-    'compression_middleware.middleware.CompressionMiddleware',
+    'silk.middleware.SilkyMiddleware',
+    'django.middleware.gzip.GZipMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

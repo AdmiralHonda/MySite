@@ -31,7 +31,6 @@
 
     <div class="row">
         <div class="col-sm-12 col-md-8">
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                 <!-- Fishing -->
                 <ins class="adsbygoogle"
                     style="display:block"
@@ -53,7 +52,7 @@
 
                         <div class="media-buttom">
                             <a href="{% url 'MyBlog:blog' topic.category.slug topic.slug %}">
-                                <img src="{{topic.ogp_img.url}}" class="media-object">
+                                <img src="{{topic.ogp_img.url}}" class="media-object img-fluid img-thumbnail">
                             </a>
                         </div>
                         <div class="media-body">
@@ -94,7 +93,6 @@
                  </ul>
               </nav>
             {%endif%}
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
             <!-- Fishing -->
             <ins class="adsbygoogle"
                 style="display:block"
@@ -111,10 +109,10 @@
                 <span class="box-title">Author</span>
                 {%if author%}
                 <center>
-                    <img src="{{author.0.profimg.url}}" style="width:100%;height:auto;">
+                    <img src="{{author.profimg.url}}" class="img-fluid img-thumbnail">
                     </center>
-                    <h4>{{author.0.name}}</h4>
-                    {{author.0.exchange_markdown|safe}}
+                    <h4>{{author.name}}</h4>
+                    {{author.exchange_markdown|safe}}
                 {%else%}
                 <p>まだないみたい</p>
                 {%endif%}
