@@ -1,22 +1,22 @@
 {%extends 'base.html'%}
 
 {%block header%}
-        <meta name="description" content="{{article.meta_description}}" />
+        <meta name="description" content="{{article.meta_description|safe}}" />
         <meta property="og:url" content="{{ request.build_absolute_uri }}" />
-        <meta property="og:title" content="{{article.ogp_title}}" />
-        <meta proparty="og:description" content="{{article.meta_description}}" />
-        <meta proparty="og:image" content="{{article.ogp_img.url}}" />
-        <meta proparty="og:image:secure_url" content="{{article.ogp_img.url}}" />
-        <meta name="thumbnail" content="{{article.ogp_img.url}}" />
+        <meta property="og:title" content="{{article.ogp_title|safe}}" />
+        <meta proparty="og:description" content="{{article.meta_description|safe}}" />
+        <meta proparty="og:image" content="{{article.ogp_img.url|safe}}" />
+        <meta proparty="og:image:secure_url" content="{{article.ogp_img.url|safe}}" />
+        <meta name="thumbnail" content="{{article.ogp_img.url|safe}}" />
         <meta proparty="og:image:type" content="image/jpeg" />
         <meta proparty="og:type" content="article" />
         <meta proparty="og:site_name" content="AdmiralHondaの航海日誌" />
         <meta proparty="og:locale" content="ja_JP" />
-        <meta name="twitter:image" content="{{article.ogp_img.url}}" />
-        <meta name="facebook:image" content="{{article.ogp_img.url}}" />
+        <meta name="twitter:image" content="{{article.ogp_img.url|safe}}" />
+        <meta name="facebook:image" content="{{article.ogp_img.url|safe}}" />
         {% load static %}
         <link rel="stylesheet" type="text/css" href="{%static 'base.css' %}">
-        <title>{{article.title}}</title>
+        <title>{{article.title|safe}}</title>
         <style>
           ul.cp_list {
             padding: 0.5em;
@@ -112,14 +112,14 @@
     <div class="col">
             <ol class="breadcrumb my-2 rounded">
               <li class="breadcrumb-item"><a href="{%url 'MyBlog:index'%}">Home</a></li>
-              <li class="breadcrumb-item"><a href="{% url 'MyBlog:search' article.category.slug 1 %}">{{article.category.name}}</a></li>
-              <li class="breadcrumb-item active" aria-current="page">{{article.slug}}</li>
+              <li class="breadcrumb-item"><a href="{% url 'MyBlog:search' article.category.slug 1 %}">{{article.category.name|safe}}</a></li>
+              <li class="breadcrumb-item active" aria-current="page">{{article.slug|safe}}</li>
             </ol>
             <center class="rounded back_color">
             <h1 style="text-align: center;">
-              {{article.ogp_title}}
+              {{article.ogp_title|safe}}
             </h1>
-            <img class="img-fluid img-thumbnail" src="{{article.ogp_img.url}}" alt="title">
+            <img class="img-fluid img-thumbnail" src="{{article.ogp_img.url|safe}}" alt="title">
             </center>
             <br>
             <!-- Fishing -->
@@ -141,18 +141,11 @@
         <p><img src="{%static 'img/submit.svg'%}" style="width:2em; height:auto;" align="left">{{article.pub_date|date}}</p>
         <p><img src="{%static 'img/update.svg'%}" style="width:2em; height:auto;" align="left">{{article.up_date|date}}</p>
     </div>
-        {%if article.category%}
-        <a href="{% url 'MyBlog:search' article.category.slug 1 %}" class=" btn btn-info mb-2 text-white">{{article.category.name}}</a>
+        <a href="{% url 'MyBlog:search' article.category.slug 1 %}" class=" btn btn-info mb-2 text-white">{{article.category.name|safe}}</a>
         <br>
-        {%else%}
-        {%endif%}
-        {%if article.tags %}
         {% for tag in article.tags.all %}
-        <a href="{% url 'MyBlog:search' tag.slug 2 %}" class="btn btn-info mr-2 mb-2 text-white">{{tag.name}}</a>
+        <a href="{% url 'MyBlog:search' tag.slug 2 %}" class="btn btn-info mr-2 mb-2 text-white">{{tag.name|safe}}</a>
         {%endfor%}
-        {%else%}
-        {%endif%}
-        
         <article role="main">
             {{article.exchange_markdown|safe}}
         </article>
@@ -175,15 +168,11 @@
     <div class="col-auto col-md-4">
       <div class="box27">
           <span class="box-title">この記事の著者</span>
-          {%if author%}
           <center>
               <img src="{{author.profimg.url}}" class="img-thumbnail img-fluid">
               </center>
-              <h4>{{author.name}}</h4>
+              <h4>{{author.name|safe}}</h4>
               {{author.exchange_markdown|safe}}
-          {%else%}
-          <p>まだないみたい</p>
-          {%endif%}
       </div>
       <!-- 右側タイムライン上 -->
       <ins class="adsbygoogle"
@@ -199,7 +188,6 @@
 </div>
     <div class="row">
       <hr size="10">
-    {%if recommend%}
     <div class="col-12 my-1 rounded back_color">
       <p class="h3 rounded text-center">他の記事<br></p>
     </div>
@@ -207,22 +195,18 @@
     <div class="col-12 col-md-6 rounded">
       <div class="card flex-md-row mb-4 shadow-sm h-md-250">
         <div class="card-body d-flex flex-column align-items-start">
-          <a href="{% url 'MyBlog:search' article.category.slug 1 %}" class="btn btn-info mb-2 text-white">{{article.category.name}}</a>
+          <a href="{% url 'MyBlog:search' article.category.slug 1 %}" class="btn btn-info mb-2 text-white">{{article.category.name|safe}}</a>
           <h3 class="mb-0">
-            <a class="text-dark" href="{%url 'MyBlog:blog' article.category.slug article.slug %}">{{article.ogp_title}}</a>
+            <a class="text-dark" href="{%url 'MyBlog:blog' article.category.slug article.slug %}">{{article.ogp_title|safe}}</a>
           </h3>
           <div class="mb-1 text-muted">{{article.pub_date|date}}</div>
-          <img class="card-img flex-auto img-fluid img-thumbnail" alt="Thumbnail" src="{{article.ogp_img.url}}"  data-holder-rendered="true">
-          <p class="card-text mb-auto">{{article.meta_description}}</p>
+          <img class="card-img flex-auto img-fluid img-thumbnail" alt="Thumbnail" src="{{article.ogp_img.url|safe}}"  data-holder-rendered="true">
+          <p class="card-text mb-auto">{{article.meta_description|safe}}</p>
           <a class="text-white btn btn-primary" href="{%url 'MyBlog:blog' article.category.slug article.slug %}">このページへ行く</a>
         </div>
       </div>
     </div>
     {%endfor%}
-    {%else%}
-    {%endif%}
     </div>
 </div>
-
-
 {%endblock%}

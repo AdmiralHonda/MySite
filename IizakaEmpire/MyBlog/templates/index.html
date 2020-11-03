@@ -28,7 +28,6 @@
 {% endblock %}
 
 {% block content %}
-
     <div class="row">
         <div class="col-sm-12 col-md-8">
                 <!-- Fishing -->
@@ -42,27 +41,22 @@
                     (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
             <h3>記事の一覧</h3>
-            {% if page_obj %}
-                    {% for topic in page_obj %}
+                {% for topic in page_obj %}
                     <div class="box7">
-                        <p>{{topic.pub_date}}</p>
-                        <button class="btn-square-shadow" onclick="location.href='{% url 'MyBlog:search' topic.category.slug 1 %}'">{{topic.category.name}}</button>
-                        <center>
-                        <h3 style="margin-left: auto; margin-right: auto;">{{topic.title}}</h3>
-
+                    <p>{{topic.pub_date|date}}</p>
+                    <button class="btn-square-shadow" onclick="location.href='{% url 'MyBlog:search' topic.category.slug 1 %}'">{{topic.category.name|safe}}</button>
+                        <h3 style="margin-left: auto; margin-right: auto;">{{topic.title|safe}}</h3>
                         <div class="media-buttom">
                             <a href="{% url 'MyBlog:blog' topic.category.slug topic.slug %}">
-                                <img src="{{topic.ogp_img.url}}" class="media-object img-fluid img-thumbnail">
+                                <img src="{{topic.ogp_img.url|safe}}" class="media-object img-fluid img-thumbnail">
                             </a>
                         </div>
                         <div class="media-body">
-                            <p style="font-size: 110%; padding:1em;">{{topic.meta_description}}</p>
+                            <p style="font-size: 110%; padding:1em;">{{topic.meta_description|safe}}</p>
                         </div>
                             <button class="btn-square-slant" onclick="location.href='{% url 'MyBlog:blog' topic.category.slug topic.slug %}'">READ MORE</button>
                     </div>
                     {% endfor %}
-            {%endif%}
-            {%if page_obj %}
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
                 {%if page_obj.has_previous %}
@@ -92,7 +86,6 @@
                 {%endif%}
                  </ul>
               </nav>
-            {%endif%}
             <!-- Fishing -->
             <ins class="adsbygoogle"
                 style="display:block"
@@ -107,15 +100,11 @@
         <div class="col-sm-12 col-md-4">
             <div class="box27">
                 <span class="box-title">Author</span>
-                {%if author%}
                 <center>
                     <img src="{{author.profimg.url}}" class="img-fluid img-thumbnail">
                     </center>
-                    <h4>{{author.name}}</h4>
+                    <h4>{{author.name|safe}}</h4>
                     {{author.exchange_markdown|safe}}
-                {%else%}
-                <p>まだないみたい</p>
-                {%endif%}
             </div>
             <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
             <!-- 右側タイムライン上 -->

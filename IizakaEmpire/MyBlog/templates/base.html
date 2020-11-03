@@ -59,11 +59,9 @@
             <nav class="navbar navbar-light bg-dark rounded" role="navigation">
               <form class="form-inline">
                 <button class="btn btn-outline-light" style="margin: 0.5em;"  type="button" onclick="location.href='{%url 'MyBlog:index'%}'">Home</button>
-                
                   {%for topic in categorys%}
                   <button class="btn btn-outline-light" style="margin: 0.5em;" type="button" onclick="location.href='{%url 'MyBlog:search' topic.slug 1 %}'">{{topic.name}}</button>
                   {%endfor%}
-                
                 <button class="btn btn-outline-light" style="margin: 0.5em;" type="button" onclick="location.href='{%url 'MyBlog:policy'%}'">サイトポリシー</button>
               </form>
             </nav>
