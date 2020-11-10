@@ -1,0 +1,39 @@
+.amazon-container {
+	background: #fff;
+	width: 100%;
+	overflow: hidden;
+	border: 1px solid #f90;
+	border-top: 2px solid #f90;
+	padding: 0;
+}
+
+.amazon-img {
+	margin: 1em;
+	border: none;
+	width: 33%;
+	float: left;
+}
+
+.amazon-img img {
+	width:100%;
+	height: auto;
+}
+
+.amazon-text {
+	font-size: 13px;
+	color: #0066c0;
+	margin: 1em;
+	padding-top: 2em;
+}
+
+.amazon-clear {
+	clear: both;
+}
+
+.amazon-footer {
+	font-size: 13px;
+	text-align: right;
+	padding-right: 1em;
+	color: #333;
+	background: linear-gradient(to bottom,#f8e6b8 0,#f3d686 6%,#ebb62c 100%);
+}

@@ -13,7 +13,6 @@ class Index(ListView):
     def get_context_data(self,**kwargs):
         context = super().get_context_data(**kwargs)
         context['author'] = get_object_or_404(Author, id=1)
-        context['categorys'] = Category.objects.all()
         return context
 
 
@@ -24,7 +23,6 @@ class Blog(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['recommend'] = Article.objects.filter(category__slug=context['article'].category.slug).exclude(slug=context['article'].slug)[:4]
-        context['categorys'] = Category.objects.all()
         context['author'] = get_object_or_404(Author, id=1)
         return context
 
@@ -32,13 +30,12 @@ class Blog(DetailView):
 class Categorys(ListView):
     
     template_name = 'index.html'
-    paginate_by = 5
+    paginate_by = 10
     context_object_name = 'article'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['author'] = get_object_or_404(Author, id=1)
-        context['categorys'] = Category.objects.all()
         return context
 
     def get_queryset(self):

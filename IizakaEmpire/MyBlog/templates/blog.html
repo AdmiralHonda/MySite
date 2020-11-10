@@ -8,14 +8,13 @@
         <meta proparty="og:image" content="{{article.ogp_img.url|safe}}" />
         <meta proparty="og:image:secure_url" content="{{article.ogp_img.url|safe}}" />
         <meta name="thumbnail" content="{{article.ogp_img.url|safe}}" />
-        <meta proparty="og:image:type" content="image/jpeg" />
         <meta proparty="og:type" content="article" />
         <meta proparty="og:site_name" content="AdmiralHondaの航海日誌" />
         <meta proparty="og:locale" content="ja_JP" />
         <meta name="twitter:image" content="{{article.ogp_img.url|safe}}" />
-        <meta name="facebook:image" content="{{article.ogp_img.url|safe}}" />
         {% load static %}
         <link rel="stylesheet" type="text/css" href="{%static 'base.css' %}">
+        <link rel="stylesheet" type="text/css" href="{%static 'amazon_link.css' %}">
         <title>{{article.title|safe}}</title>
         <style>
           ul.cp_list {
@@ -119,7 +118,7 @@
             <h1 style="text-align: center;">
               {{article.ogp_title|safe}}
             </h1>
-            <img class="img-fluid img-thumbnail" src="{{article.ogp_img.url|safe}}" alt="title">
+            <img class="img-fluid img-thumbnail" src="{{article.ogp_img.url|safe}}" alt="{{article.title|safe}}">
             </center>
             <br>
             <!-- Fishing -->
@@ -169,7 +168,7 @@
       <div class="box27">
           <span class="box-title">この記事の著者</span>
           <center>
-              <img src="{{author.profimg.url}}" class="img-thumbnail img-fluid">
+              <img src="{{author.profimg.url|safe}}" class="img-thumbnail img-fluid">
               </center>
               <h4>{{author.name|safe}}</h4>
               {{author.exchange_markdown|safe}}
@@ -186,27 +185,27 @@
       </script>
   </div>
 </div>
-    <div class="row">
-      <hr size="10">
-    <div class="col-12 my-1 rounded back_color">
-      <p class="h3 rounded text-center">他の記事<br></p>
+<div class="row">
+  <hr size="10">
+<div class="col-12 my-1 rounded back_color">
+  <p class="h3 rounded text-center">他の記事<br></p>
+</div>
+{% for article in recommend %}
+<div class="col-12 col-md-6 rounded">
+  <div class="card flex-md-row mb-4 shadow-sm h-md-250">
+    <div class="card-body d-flex flex-column align-items-start">
+      <a href="{% url 'MyBlog:search' article.category.slug 1 %}" class="btn btn-info mb-2 text-white">{{article.category.name|safe}}</a>
+      <h3 class="mb-0">
+        <a class="text-dark" href="{%url 'MyBlog:blog' article.category.slug article.slug %}">{{article.ogp_title|safe}}</a>
+      </h3>
+      <div class="mb-1 text-muted">{{article.pub_date|date}}</div>
+      <img class="card-img flex-auto img-fluid img-thumbnail" alt="Thumbnail" src="{{article.ogp_img.url|safe}}"  data-holder-rendered="true">
+      <p class="card-text mb-auto">{{article.meta_description|safe}}</p>
+      <a class="text-white btn btn-primary" href="{%url 'MyBlog:blog' article.category.slug article.slug %}">このページへ行く</a>
     </div>
-    {% for article in recommend %}
-    <div class="col-12 col-md-6 rounded">
-      <div class="card flex-md-row mb-4 shadow-sm h-md-250">
-        <div class="card-body d-flex flex-column align-items-start">
-          <a href="{% url 'MyBlog:search' article.category.slug 1 %}" class="btn btn-info mb-2 text-white">{{article.category.name|safe}}</a>
-          <h3 class="mb-0">
-            <a class="text-dark" href="{%url 'MyBlog:blog' article.category.slug article.slug %}">{{article.ogp_title|safe}}</a>
-          </h3>
-          <div class="mb-1 text-muted">{{article.pub_date|date}}</div>
-          <img class="card-img flex-auto img-fluid img-thumbnail" alt="Thumbnail" src="{{article.ogp_img.url|safe}}"  data-holder-rendered="true">
-          <p class="card-text mb-auto">{{article.meta_description|safe}}</p>
-          <a class="text-white btn btn-primary" href="{%url 'MyBlog:blog' article.category.slug article.slug %}">このページへ行く</a>
-        </div>
-      </div>
-    </div>
-    {%endfor%}
-    </div>
+  </div>
+</div>
+{%endfor%}
+</div>
 </div>
 {%endblock%}
