@@ -11,15 +11,14 @@
         <meta name="twitter:widgets:theme" content="dark" />
         <!--Facebook-->
         <meta name="fb:app_id" content="531738907544477"/>
-
+        <!--Link-->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
         <link rel="canonical" href="https://www.admiralhonda.com{{ request.get_full_path }}" />
         {%block header%}
         {% endblock %}
         {% load static %}
-        <link rel="apple-touch-icon" sizes="180x180" href="{% static '/img/IMG_0459.png' %}">
-        <link rel="icon" type="image/png" href="{% static '/img/IMG_0459.png' %}">
-
-        <link rel= "stylesheet" href= "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity= "sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin= "anonymous" > 
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static '/img/author_profile.webp' %}">
+        <link rel="icon" href="{% static '/img/author_profile.webp' %}"> 
         <meta http-equiv="x-dns-prefetch-control" content="on">
         <link rel="dns-prefetch" href="//pagead2.googlesyndication.com"/>
         <link rel="dns-prefetch" href="//googleads.g.doubleclick.net"/>
@@ -37,26 +36,36 @@
     </head>
     <body>
         <div class="container">
-            <header style="background-color: darkcyan;" class="jumbotron rounded" role="banner">
-            <p onclick="location.href='{%url 'MyBlog:index'%}'" style="background-color: darkcyan; color: white;" class="h2 display-4">AdmiralHondaの航海日誌</p>
-            <p class="lead" style="color: white;background-color: darkcyan;">~アウトドアや釣りの話など~</p>
-            </header>
-            <nav class="navbar navbar-light bg-dark rounded" role="navigation">
-              <form class="form-inline">
-                <button class="btn btn-outline-light" style="margin: 0.5em;"  type="button" onclick="location.href='{%url 'MyBlog:index'%}'">Home</button>
-                <button class="btn btn-outline-light" style="margin: 0.5em;" type="button" onclick="location.href='{%url 'MyBlog:search' 'Outdoor' 1 %}'">アウトドア</button>
-                <button class="btn btn-outline-light" style="margin: 0.5em;" type="button" onclick="location.href='{%url 'MyBlog:search' 'Fishing' 1 %}'">釣り</button>
-                <button class="btn btn-outline-light" style="margin: 0.5em;" type="button" onclick="location.href='{%url 'MyBlog:policy'%}'">サイトポリシー</button>
-              </form>
-            </nav>
+            <div class="card mb-3" style="background-color: darkcyan;">
+                <div class="row">
+                  <div class="col-4 col-md-5">
+                    <img src="{% static '/img/author_profile.webp' %}" alt="author_profile_AdmiralHonda">
+                  </div>
+                  <div class="col-8 col-md-7">
+                    <div class="card-body">
+                      <h5 class="card-title text-white">AdmiralHonda's Fishing Diary</h5>
+                      <p class="card-text text-white">~福島でのアウトドアや釣り、登山など~</p>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="row">
+                <nav class="navbar navbar-light bg-dark rounded" role="navigation">
+                    <form class="form-inline">
+                      <button class="btn btn-outline-light" style="margin: 0.5em;"  type="button" onclick="location.href='{%url 'MyBlog:index'%}'">Home</button>
+                      <button class="btn btn-outline-light" style="margin: 0.5em;" type="button" onclick="location.href='{%url 'MyBlog:search' 'Outdoor' 1 %}'">アウトドア</button>
+                      <button class="btn btn-outline-light" style="margin: 0.5em;" type="button" onclick="location.href='{%url 'MyBlog:search' 'Fishing' 1 %}'">フィッシング</button>
+                      <button class="btn btn-outline-light" style="margin: 0.5em;" type="button" onclick="location.href='{%url 'MyBlog:policy'%}'">サイトポリシー</button>
+                    </form>
+                </nav>
+            </div>
         {%block content%}
         {% endblock %}
         <footer class="text-center rounded" role="contentinfo" style="background-color: darkcyan;color: white;">
             ©2020 admiralhonda.com All Rights Reserved.
         </footer>
         </div>
-       <script src= "https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity= "sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin= "anonymous" ></script>
-       <script src= "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity= "sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin= "anonymous" ></script>
-       <script src= "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity= "sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin= "anonymous" ></script> 
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
     </body>
 </html>

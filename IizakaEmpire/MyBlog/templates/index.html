@@ -2,7 +2,7 @@
 
 {% block header %}
 <meta name="description" content="人生という航海の中での日誌。主に釣りのブログです。" />
-<title>AdmiralHonda's LogBook</title>
+<title>AdmiralHonda's Fishing Diary</title>
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{%static 'base.css' %}">
 <style>
@@ -54,7 +54,9 @@
                         <div class="media-body">
                             <p style="font-size: 110%; padding:1em;">{{topic.meta_description|safe}}</p>
                         </div>
-                            <button class="btn-square-slant" onclick="location.href='{% url 'MyBlog:blog' topic.category.slug topic.slug %}'">READ MORE</button>
+                        <center>
+                        <button class="btn-square-slant" onclick="location.href='{% url 'MyBlog:blog' topic.category.slug topic.slug %}'">READ MORE</button>
+                            </center>
                     </div>
                     {% endfor %}
             <nav aria-label="Page navigation example">

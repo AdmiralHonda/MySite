@@ -1,9 +1,13 @@
 from django.urls import path,include
-
+from rest_framework import routers
 from . import views
-from .views import Index, Blog, Categorys
+from .views import Index, Blog, Categorys, TagAPI, AriticleAPI
 
 app_name='MyBlog'
+
+router = routers.DefaultRouter()
+router.register('tag', TagAPI)
+router.register('article', AriticleAPI)
 
 urlpatterns = [
     path('', Index.as_view(), name='index'),

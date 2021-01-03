@@ -2,7 +2,11 @@ from django.shortcuts import render, get_list_or_404, get_object_or_404
 from django.core.paginator import Paginator
 from django.http import HttpResponse, Http404
 from django.views.generic import TemplateView, ListView, DetailView
+import django_filters
+from rest_framework import viewsets, filters
+from .serializer import TagEntry, ArticleEntry
 from .models import Article, Author, Category, Policy,Tag
+
 
 class Index(ListView):
     model = Article
@@ -23,7 +27,6 @@ class Blog(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['recommend'] = Article.objects.filter(category__slug=context['article'].category.slug).exclude(slug=context['article'].slug)[:4]
-        context['author'] = get_object_or_404(Author, id=1)
         return context
 
 
@@ -46,6 +49,16 @@ class Categorys(ListView):
             return Article.objects.filter(tags__slug = self.kwargs['kinds'])
         else:
             return Article.objects.all()
+
+
+class TagAPI(viewsets.ModelViewSet):
+    queryset = Tag.objects.all()
+    serializer_class = TagEntry
+
+
+class AriticleAPI(viewsets.ModelViewSet):
+    queryset = Article.objects.all()[:4]
+    serializer_class = ArticleEntry
 
 def sitepolicy(request):
     policy=get_object_or_404(Policy,id=1)

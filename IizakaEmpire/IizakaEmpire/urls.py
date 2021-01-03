@@ -20,6 +20,9 @@ from django.conf.urls.static import static
 from django.contrib.sitemaps.views import sitemap
 from .sitemaps import MyBlogSitemap,StaticSitemap
 from django.views.generic import TemplateView
+
+from MyBlog.urls import router
+
 sitemaps={
     'blog':MyBlogSitemap,
     'static':StaticSitemap,
@@ -32,6 +35,7 @@ urlpatterns = [
     path('sitemap.xml',sitemap,{'sitemaps' : sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     path('robots.txt',TemplateView.as_view(template_name="robots.txt", content_type="text/plain")),
     path('ads.txt',TemplateView.as_view(template_name="ads.txt", content_type="text/plain")),
+    path('api/', include(router.urls)),
 ]
 
 urlpatterns += [path('silk/', include('silk.urls', namespace='silk'))]

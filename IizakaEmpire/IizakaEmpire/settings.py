@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django_cleanup',#for rm image
     'django.contrib.sites',#for sitemap←if you manage single site,this app cause error 'Does't exist /admin/login'
     'django.contrib.sitemaps',#for sitemap
+    'rest_framework',
     'silk'
 ]
 
