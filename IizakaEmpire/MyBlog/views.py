@@ -23,12 +23,7 @@ class Index(ListView):
 class Blog(DetailView):
     template_name = 'blog.html'
     model = Article
- 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['recommend'] = Article.objects.filter(category__slug=context['article'].category.slug).exclude(slug=context['article'].slug)[:4]
-        return context
-
+    
 
 class Categorys(ListView):
     
@@ -57,8 +52,12 @@ class TagAPI(viewsets.ModelViewSet):
 
 
 class AriticleAPI(viewsets.ModelViewSet):
-    queryset = Article.objects.all()[:4]
+    queryset = Article.objects.all()[:1]
     serializer_class = ArticleEntry
+
+    def get_queryset(self):
+        print(self.request.GET)
+        return Article.objects.filter(category__slug=self.request.GET['category']).exclude(slug=self.request.GET['art_id'])[:4]
 
 def sitepolicy(request):
     policy=get_object_or_404(Policy,id=1)

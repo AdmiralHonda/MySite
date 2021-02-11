@@ -138,7 +138,9 @@
         }
 
         function getArticleList() {
-          var api_url = 'https://www.admiralhonda.com/api/article/?format=json';
+          var now_loc = location.pathname.split('/');
+          console.log(now_loc);
+          var api_url = 'https://www.admiralhonda.com/api/article/?format=json'+'&'+'category='+now_loc[2]+'&'+'art_id='+now_loc[3];
           fetch(api_url)
         .then(response => response.json())
         .then(function(data){
