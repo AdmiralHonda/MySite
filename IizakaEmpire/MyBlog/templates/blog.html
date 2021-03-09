@@ -1,167 +1,238 @@
 {%extends 'base.html'%}
 
 {%block header%}
-        <meta name="description" content="{{article.meta_description}}" />
+        <meta name="description" content="{{article.meta_description|safe}}" />
         <meta property="og:url" content="{{ request.build_absolute_uri }}" />
-        <meta property="og:title" content="{{article.ogp_title}}" />
-        <meta proparty="og:description" content="{{article.meta_description}}" />
-        <meta proparty="og:image" content="{{article.ogp_img.url}}" />
-        <meta proparty="og:image:secure_url" content="{{article.ogp_img.url}}" />
-        <meta proparty="og:image:type" content="image/jpeg" />
+        <meta property="og:title" content="{{article.ogp_title|safe}}" />
+        <meta proparty="og:description" content="{{article.meta_description|safe}}" />
+        <meta proparty="og:image" content="{{article.ogp_img.url|safe}}" />
+        <meta proparty="og:image:secure_url" content="{{article.ogp_img.url|safe}}" />
+        <meta name="thumbnail" content="{{article.ogp_img.url|safe}}" />
         <meta proparty="og:type" content="article" />
         <meta proparty="og:site_name" content="AdmiralHondaの航海日誌" />
         <meta proparty="og:locale" content="ja_JP" />
-        <meta name="twitter:image" content="{{article.ogp_img.url}}" />
-        <meta name="facebook:image" content="{{article.ogp_img.url}}" />
-
-        <!--facebook-->
-        <div id="fb-root"></div>
-            <script>(function(d, s, id) {
-                var js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id)) return;
-                js = d.createElement(s); js.id = id;
-                js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
-                fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));</script>
-        {%load static%}
-        <title>{{article.title}}</title>
+        <meta name="twitter:image" content="{{article.ogp_img.url|safe}}" />
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{%static 'base.css' %}">
+        <link rel="stylesheet" type="text/css" href="{%static 'amazon_link.css' %}">
+        <title>{{article.title|safe}}</title>
         <style>
-          .box27 {
+          article ul,ol{
+            padding: 0;
+          }
+          article ul li,article ol li {
             position: relative;
-            margin: 2em 0;
-            padding: 0.5em 1em;
-            border: solid 3px #62c1ce;
-        }
-        .box27 .box-title {
-          position: absolute;
-          display: inline-block;
-          top: -27px;
-          left: -3px;
-          padding: 0 9px;
-          height: 25px;
-          line-height: 25px;
-          font-size: 17px;
-          background: #62c1ce;
-          color: #ffffff;
-          font-weight: bold;
-          border-radius: 5px 5px 0 0;
-      }
-      
-        ul.cp_list {
-          padding: 0.5em;
-          list-style-type: none;
-        }
-        ul.cp_list li {
-          position: relative;
-          padding: 0.5em 1em 0.5em 2.3em;
-          margin-bottom:5px;
-        }
-        ul.cp_list li:after,
-        ul.cp_list li:before{
-          content:'';
-          position: absolute;
-          border-radius: 50%;
-        }
-        ul.cp_list li:before {
-          top: 50%;
-          left: 0.2em;
-          width: 17px;
-          height: 17px;
-          background: rgba(25,118,210, 1);
-          transform: translateY(-50%);
-        }
-        ul.cp_list li:after {
-          top: 1.1em;
-          left: 0.7em;
-          width: 14px;
-          height: 14px;
-          background: rgba(25,118,210, 0.5);
-        }
+            list-style-type: none!important;/*ポチ消す*/
+            padding: 0.5em 0.5em 0.5em 0.5em;
+            margin-bottom: 5px;
+            line-height: 1.5;
+            background: #dbebf8;
+            vertical-align: middle;
+            color: #505050;
+            border-radius: 15px 0px 0px 15px;/*左側の角丸く*/
+          }
+          article ul li:before{ 
+            display:inline-block; 
+            vertical-align: middle;
+            /*以下白丸つくる*/
+            content:'';
+            width:1em;
+            height: 1em;
+            background: #fff;
+            border-radius: 50%;
+            margin-right: 8px;
+          }
 
-              p{
-                font-size: 100%;
-                line-height: 2em;
-              }
-              a {
-                text-decoration: none;
-                text-emphasis: none;
-                color: black;
-              }
-              a:link,a:visited,a:hover,a:active{
-                color: black;
-                text-decoration: none;
-                text-emphasis: none;
-              }
-              h3{
-                  padding: 0.5em;/*文字周りの余白*/
-                  color: #010101;/*文字色*/
-                  background: #eaf3ff;/*背景色*/
-                  border-bottom: solid 0.5em darkcyan;/*下線*/
-              }
-              h4 {
-                background: linear-gradient(transparent 90%, darkcyan 90%);
-              }
-            
-              @media only screen and (max-width: 767px){
-            
+          p{
+            font-size: 100%;
+            line-height: 2em;
+          }
+          a {
+            text-decoration: none;
+            text-emphasis: none;
+            color: black;
+          }
+          a:link,a:visited,a:hover,a:active{
+            color: black;
+            text-decoration: none;
+            text-emphasis: none;
+          }
+           h3{
+              padding: 0.5em;/*文字周りの余白*/
+              color: #010101;/*文字色*/
+              background: #eaf3ff;/*背景色*/
+              border-bottom: solid 0.5em darkcyan;/*下線*/
+          }
+          article h4 {
+            position: relative;
+            background: #dfefff;
+            box-shadow: 0px 0px 0px 5px #dfefff;
+            border: dashed 2px white;
+            padding: 0.2em 0.5em;
+            color: #454545;
+          }
+          
+          article h4:after {
+            position: absolute;
+            content: '';
+            left: -7px;
+            top: -7px;
+            border-width: 0 0 15px 15px;
+            border-style: solid;
+            border-color: #fff #fff #a8d4ff;
+            box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+          }
+          @media only screen and (max-width: 767px){ 
               img {
                 display: block;
-                max-width: 100%;
+                max-width: 70%;
                 height: auto;
                 margin-left: auto;
                 margin-right: auto;
               }
-            
-              }
-            
-              @media only screen and (min-width: 767px),print{
+          }
+          @media only screen and (min-width: 767px),print{
               img {
                 display: block;
-                max-width: 80%;
+                max-width: 60%;
                 height: auto;
                 margin-left: auto;
                 margin-right: auto;
               }
-              }
-              /*見出し周り*/
+          }
+          /*見出し周り*/
+          h1 {
+            /*線の種類（二重線）太さ 色*/
+            border-bottom: double 5px darkcyan;
+           }
+          h2 {
+            padding: 0.4em 0.5em;/*文字の上下 左右の余白*/
+            color: #494949;/*文字色*/
+            background: #f4f4f4;/*背景色*/
+            border-left: solid 5px darkcyan;/*左線*/
+            border-bottom: solid 3px #d7d7d7;/*下線*/
+          }
             
-              h1 {
-                /*線の種類（二重線）太さ 色*/
-                border-bottom: double 5px darkcyan;
-              }
-            
-              h2 {
-                padding: 0.4em 0.5em;/*文字の上下 左右の余白*/
-                color: #494949;/*文字色*/
-                background: #f4f4f4;/*背景色*/
-                border-left: solid 5px darkcyan;/*左線*/
-                border-bottom: solid 3px #d7d7d7;/*下線*/
-              }
-            
-              h3 {
-                border-bottom: darkcyan;
-              }
-              
+          h3 {
+            border-bottom: darkcyan;
+          }    
         </style>
+        <script>
+          function getTagList() {
+            var api_url = 'https://www.admiralhonda.com/api/tag/?format=json';
+            fetch(api_url)
+          .then(response => response.json())
+          .then(function(data){
+            tag_list = document.getElementById('blog_tag');
+            for(var i=0 ; i < data.length;i++){
+              var slug = data[i].slug;
+              var intag = document.createElement("a");
+              intag.href="https://www.admiralhonda.com/search/"+slug+"/2/";
+              intag.innerHTML=data[i].name;
+              intag.classList.add('nav-link', 'btn', 'btn-info','m-1');
+              tag_list.appendChild(intag);
+              tag_list.appendChild(document.createElement("br"));
+            }
+          }
+          );
+        }
+
+        function getArticleList() {
+          var now_loc = location.pathname.split('/');
+          console.log(now_loc);
+          var api_url = 'https://www.admiralhonda.com/api/article/?format=json'+'&'+'category='+now_loc[2]+'&'+'art_id='+now_loc[3];
+          fetch(api_url)
+        .then(response => response.json())
+        .then(function(data){
+          tag_list = document.getElementById('recommend');
+          for(var i=0 ; i < data.length;i++){
+            var slug = data[i].slug;
+            var meta_slug;
+            var meta_name;
+            if(data[i].category==2){
+              meta_slug = "Fishing";
+              meta_name = "釣り";
+            }
+            else{
+              meta_slug = "Outdoor";
+              meta_name = "アウトドア";
+            }
+            var rec_article = document.createElement("div");
+            rec_article.classList.add('col-12', 'col-md-6', 'rounded');
+            
+            var card = document.createElement("div");
+            card.classList.add('card', 'flex-md-row', 'mb-4', 'shadow-sm', 'h-md-250');
+            
+            var card_body = document.createElement("div");
+            card.classList.add('card-body', 'd-flex', 'flex-colum', 'align-items-start');
+            
+            var category = document.createElement("a");
+            category.classList.add('btn', 'btn-info', 'mb-2', 'text-white');
+            category.href = "https://www.admiralhonda.com/search/"+meta_slug+"/1/";
+            category.innerHTML = meta_name;
+
+            var header3 = document.createElement("h3");
+            header3.classList.add('mb-0');
+            var top = document.createElement("a");
+            top.classList.add('text-dark');
+            top.href = "https://www.admiralhonda.com/blog/"+meta_slug+"/"+data[i].slug+"/";
+            top.innerText = data[i].ogp_title;
+            header3.appendChild(top);
+
+            var pub_date = document.createElement("div");
+            pub_date.classList.add('mb-1', 'text-muted');
+            pub_date.innerHTML = data[i].pub_date;
+
+            var image = document.createElement("img");
+            image.src = data[i].ogp_img;
+            image.alt = data[i].ogp_title;
+            image.classList.add('card-img', 'flex-auto', 'img-fluid', 'img-thumnail');
+
+            var description = document.createElement("p");
+            description.classList.add('card-text', 'mb-auto');
+            description.innerHTML = data[i].meta_description;
+
+            var move = document.createElement("a");
+            move.classList.add('text-white', 'btn', 'btn-primary', 'm-auto');
+            move.innerHTML = "見てみる";
+            move.href = "https://www.admiralhonda.com/blog/"+meta_slug+"/"+data[i].slug+"/";
+            
+            card_body.appendChild(category);
+            card_body.appendChild(header3);
+            card_body.appendChild(pub_date);
+            card_body.appendChild(image);
+            card_body.appendChild(description);
+            card_body.appendChild(move);
+            card.appendChild(card_body);
+            rec_article.appendChild(card);
+            tag_list.appendChild(rec_article);
+          }
+        }
+        );
+      }
+        
+        window.addEventListener('load',function(){
+            getTagList();
+            getArticleList();
+        });
+        
+        </script>
 {%endblock%}
-
 {%block content%}
-
 <div class="row">
     <div class="col">
-
-            <ol class="breadcrumb">
+            <ol class="breadcrumb my-2 rounded">
               <li class="breadcrumb-item"><a href="{%url 'MyBlog:index'%}">Home</a></li>
-              <li class="breadcrumb-item"><a href="{% url 'MyBlog:search' article.category.slug 1 %}">{{article.category.name}}</a></li>
-              <li class="breadcrumb-item active" aria-current="page">{{article.slug}}</li>
+              <li class="breadcrumb-item"><a href="{% url 'MyBlog:search' article.category.slug 1 %}" id="type">{{article.category.name|safe}}</a></li>
+              <li class="breadcrumb-item active" aria-current="page">{{article.slug|safe}}</li>
             </ol>
-            <center>
+            <center class="rounded back_color">
             <h1 style="text-align: center;">
-                {{article.title}}
+              {{article.ogp_title|safe}}
             </h1>
+            <img class="img-fluid img-thumbnail" src="{{article.ogp_img.url|safe}}" alt="{{article.title|safe}}">
             </center>
             <br>
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
             <!-- Fishing -->
             <ins class="adsbygoogle"
                 style="display:block"
@@ -172,112 +243,50 @@
             <script>
                 (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
-            <!--sns-->
-            <div align='right'>
-                <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" style="margin:2%;" class="twitter-share-button" data-show-count="false" align="right">ツイート</a>
-                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-                    <a href="https://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" style="margin:2%;" data-hatena-bookmark-layout="touch-counter" data-hatena-bookmark-width="40" data-hatena-bookmark-height="40" title="このエントリーをはてなブックマークに追加" align="right"><img src="https://b.st-hatena.com/images/v4/public/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
-                    <script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-                    <div class="fb-share-button" 
-                        data-href="{%url 'MyBlog:blog' article.category.slug article.slug%}" 
-                        data-layout="button_count">
-                    </div>
-                    <div class="line-it-button" style="display: none;" data-lang="ja"
-                     data-type="share-a" data-ver="3" 
-                     data-url="{%url 'MyBlog:blog' article.category.slug article.slug%}"
-                      data-color="default" data-size="small" data-count="true">
-                    </div>
-                    <script src="https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js" async="async" defer="defer"></script>
-            </div>
-            <div>
-                <p><img src="{%static 'img/submit.svg'%}" style="width:2em; height:auto;" align="left">{{article.pub_date|date}}</p>
-                <p><img src="{%static 'img/update.svg'%}" style="width:2em; height:auto;" align="left">{{article.up_date|date}}</p>
-            </div>
     </div>
 </div>
 
-<div class="row">
-    <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
-        {%if article.category%}
-        <a href="{% url 'MyBlog:search' article.category.slug 1 %}" class="badge mb-2" style="background-color: darkcyan;color:white;font-size: 120%;line-height: 2em;">{{article.category.name}}</a>
+<div class="row rounded">
+    <div class="col-12 col-md-10 rounded back_color">
+      <div>
+        <p><img src="{%static 'img/submit.svg'%}" style="width:2em; height:auto;" alt="submit" class="float-left">{{article.pub_date|date}}</p>
+        <p><img src="{%static 'img/update.svg'%}" style="width:2em; height:auto;" alt="update" class="float-left">{{article.up_date|date}}</p>
+      </div>
+        <a href="{% url 'MyBlog:search' article.category.slug 1 %}" class=" btn btn-info mb-2 text-white">{{article.category.name|safe}}</a>
         <br>
-        {%else%}
-        {%endif%}
-        {%if tags %}
-        {% for tag in tags %}
-        <a href="{% url 'MyBlog:search' tag.slug 2 %}" class="badge mr-2 mb-2" style="background-color: darkcyan;color:white;font-size: 120%;line-height: 2em;">{{tag.name}}</a>
-        {%endfor%}
-        {%else%}
-        {%endif%}
-        
-        <article>
+        <center>
+        <article role="main">
             {{article.exchange_markdown|safe}}
         </article>
+        </center>
         <br>
         <br>
         <br>
-    </div>
-    <div class="col-auto col-sm-auto col-md-4 col-lg-4 col-xl-4">
-      <div class="box27">
-          <span class="box-title">この記事の著者</span>
-          {%if author%}
-          <center>
-              <img src="{{author.0.profimg.url}}" style="width:100%;height:auto;">
-              </center>
-              <h4>{{author.0.name}}</h4>
-              {{author.0.exchange_markdown|safe}}
-          {%else%}
-          <p>まだないみたい</p>
-          {%endif%}
-      </div>
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-      <!-- 右側タイムライン上 -->
-      <ins class="adsbygoogle"
-          style="display:block"
-          data-ad-client="ca-pub-3952779346887893"
-          data-ad-slot="4110769312"
-          data-ad-format="auto"
-          data-full-width-responsive="true"></ins>
-      <script>
-          (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
-      <a class="twitter-timeline" href="https://twitter.com/AdmiralHonda?ref_src=twsrc%5Etfw">Tweets by AdmiralHonda</a>
-      <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
-  </div>
-</div>
-    <div class="row">
-      <hr size="10">
-    {%if recommend%}
-    <div class="col-12">
-      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
       <!-- Fishing -->
       <ins class="adsbygoogle"
           style="display:block"
           data-ad-client="ca-pub-3952779346887893"
           data-ad-slot="2902710997"
-          data-ad-format="auto"
+          data-ad-format="auto"<iframe src="https://rcm-fe.amazon-adsystem.com/e/cm?o=9&p=11&l=ez&f=ifr&linkID=c0ce4b3f620d3b859a020ade4bf3e5e1&t=admiralhond0c-22&tracking_id=admiralhond0c-22" width="120" height="600" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>
           data-full-width-responsive="true"></ins>
       <script>
           (adsbygoogle = window.adsbygoogle || []).push({});
       </script>
-      <p class="h3">他の記事<br></p>
     </div>
-    {% for article in recommend %}
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 text-center">
-              <div class="card">
-                <h5 class="card-title">{{article.title}}</h5>
-                  <img src="{{article.ogp_img.url}}" class="bd-placeholder-img card-img-top" style="width: 100%; height:auto;" alt="{{artice.slug}}">
-                  <div class="card-body">
-                      <p class="card-text" style="font-size: 100%;">{{article.meta_description}}</p>
-                      <a href="{% url 'MyBlog:blog' article.category.slug article.slug %}" class="btn btn-primary">見てみる</a>
-                  </div>
-              </div>
-        </div>
-    {%endfor%}
-    {%else%}
-    {%endif%}
-    </div>
+    <div class="col-12 col-md-2">
+      <div class="d-block d-sm-none"></div>
+      <div class="nav-scroller d-none d-sm-block">
+        <nav class="nav nav-underline flex-colum" id="blog_tag" role="navigation">
+          <iframe src="https://rcm-fe.amazon-adsystem.com/e/cm?o=9&p=11&l=ez&f=ifr&linkID=c0ce4b3f620d3b859a020ade4bf3e5e1&t=admiralhond0c-22&tracking_id=admiralhond0c-22" width="120" height="600" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>
+          <p class="nav-link h4">タグ一覧</p>
+          <br>
+        </nav>
+      </div>
+    </nav>
+  </div>
+<div class="row" id="recommend">
+<div class="col-12 my-1 rounded">
+
 </div>
-
-
+</div>
 {%endblock%}

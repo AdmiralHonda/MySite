@@ -44,12 +44,15 @@ INSTALLED_APPS = [
     'django_cleanup',#for rm image
     'django.contrib.sites',#for sitemap←if you manage single site,this app cause error 'Does't exist /admin/login'
     'django.contrib.sitemaps',#for sitemap
+    'rest_framework',
+    'silk'
 ]
 
 SITE_ID = 3
 
 MIDDLEWARE = [
-    'compression_middleware.middleware.CompressionMiddleware',
+    'silk.middleware.SilkyMiddleware',
+    'django.middleware.gzip.GZipMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -64,7 +67,6 @@ ROOT_URLCONF = 'IizakaEmpire.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -137,6 +139,5 @@ GS_BUCKET_NAME = sercret.YOURBUCKETNAME
 from google.oauth2 import service_account
 
 GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
-    os.path.join(BASE_DIR,'mysiteandship-3e1fa5ac8c78.json')
+    os.path.join(BASE_DIR,'mysiteandship-1f606245abce.json')
 )
-

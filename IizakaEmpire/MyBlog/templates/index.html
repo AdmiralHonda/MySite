@@ -2,17 +2,34 @@
 
 {% block header %}
 <meta name="description" content="人生という航海の中での日誌。主に釣りのブログです。" />
-<title>AdmiralHonda's LogBook</title>
+<title>AdmiralHonda's Fishing Diary</title>
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{%static 'index.css' %}">
-
+<link rel="stylesheet" type="text/css" href="{%static 'base.css' %}">
+<style>
+    @media only screen and (max-width: 767px){
+        img {
+            display: block;
+            max-width: 50%;
+            height: auto;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+    @media only screen and (min-width: 767px),print{
+        img {
+            display: block;
+            max-width: 40%;
+            height: auto;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+</style>
 {% endblock %}
 
 {% block content %}
-
     <div class="row">
         <div class="col-sm-12 col-md-8">
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
                 <!-- Fishing -->
                 <ins class="adsbygoogle"
                     style="display:block"
@@ -24,27 +41,24 @@
                     (adsbygoogle = window.adsbygoogle || []).push({});
                 </script>
             <h3>記事の一覧</h3>
-            {% if page_obj %}
-                    {% for topic in page_obj %}
+                {% for topic in page_obj %}
                     <div class="box7">
-                        <p>{{topic.pub_date}}</p>
-                        <button class="btn-square-shadow" onclick="location.href='{% url 'MyBlog:search' topic.category.slug 1 %}'">{{topic.category.name}}</button>
-                        <center>
-                        <h3 style="margin-left: auto; margin-right: auto;">{{topic.title}}</h3>
-
+                    <p>{{topic.pub_date|date}}</p>
+                    <button class="btn-square-shadow" onclick="location.href='{% url 'MyBlog:search' topic.category.slug 1 %}'">{{topic.category.name|safe}}</button>
+                        <h3 style="margin-left: auto; margin-right: auto;">{{topic.title|safe}}</h3>
                         <div class="media-buttom">
                             <a href="{% url 'MyBlog:blog' topic.category.slug topic.slug %}">
-                                <img src="{{topic.ogp_img.url}}" class="media-object">
+                                <img src="{{topic.ogp_img.url|safe}}" class="media-object img-fluid img-thumbnail">
                             </a>
                         </div>
                         <div class="media-body">
-                            <p style="font-size: 110%; padding:1em;">{{topic.meta_description}}</p>
+                            <p style="font-size: 110%; padding:1em;">{{topic.meta_description|safe}}</p>
                         </div>
-                            <button class="btn-square-slant" onclick="location.href='{% url 'MyBlog:blog' topic.category.slug topic.slug %}'">READ MORE</button>
+                        <center>
+                        <button class="btn-square-slant" onclick="location.href='{% url 'MyBlog:blog' topic.category.slug topic.slug %}'">READ MORE</button>
+                            </center>
                     </div>
                     {% endfor %}
-            {%endif%}
-            {%if page_obj %}
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
                 {%if page_obj.has_previous %}
@@ -74,20 +88,25 @@
                 {%endif%}
                  </ul>
               </nav>
-            {%endif%}
+            <!-- Fishing -->
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-3952779346887893"
+                data-ad-slot="2902710997"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
         </div>
         <div class="col-sm-12 col-md-4">
             <div class="box27">
                 <span class="box-title">Author</span>
-                {%if author%}
                 <center>
-                    <img src="{{author.0.profimg.url}}" style="width:100%;height:auto;">
+                    <img src="{{author.profimg.url}}" class="img-fluid img-thumbnail">
                     </center>
-                    <h4>{{author.0.name}}</h4>
-                    {{author.0.exchange_markdown|safe}}
-                {%else%}
-                <p>まだないみたい</p>
-                {%endif%}
+                    <h4>{{author.name|safe}}</h4>
+                    {{author.exchange_markdown|safe}}
             </div>
             <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
             <!-- 右側タイムライン上 -->
