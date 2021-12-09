@@ -1,0 +1,10 @@
+version: '3.3'
+services:
+  admiral_hp:
+    build: .
+    tty: true
+    ports: 
+      - "1313:127.0.0.1:1313"
+    volumes: 
+      - .:/src
+    
