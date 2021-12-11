@@ -1,9 +1,0 @@
-# nomal conf 
-User-agent:*
-allow: /
-
-User-agent:*
-disallow: /silk/
-
-#for searching location of sitemap
-Sitemap: https://www.admiralhonda.com/sitemap.xml
