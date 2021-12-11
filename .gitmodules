@@ -1,0 +1,3 @@
+[submodule "admiralhonda/themes/hugo-future-imperfect-slim"]
+	path = admiralhonda/themes/hugo-future-imperfect-slim
+	url = https://github.com/pacollins/hugo-future-imperfect-slim.git

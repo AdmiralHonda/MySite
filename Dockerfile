@@ -1,8 +1,8 @@
 FROM ubuntu
 
 USER root
-WORKDIR /src
+WORKDIR /src/
 ADD . /src/
 
 RUN apt-get update
-RUN apt-get install -y git \ hugo
+RUN apt-get install -y git hugo
