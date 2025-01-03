@@ -1,0 +1,31 @@
+
+modules = ["nodejs-20"]
+hidden = [".config", "package-lock.json"]
+
+# .開発時の開発設定
+run = "npm run dev"
+
+[env]
+PROJ_ROOT = "/home/runner/HondeeBlog/app"
+
+[gitHubImport]
+requiredFiles = [".replit", "replit.nix", "package.json", "package-lock.json"]
+
+[nix]
+channel = "stable-24_05"
+
+[unitTest]
+language = "nodejs"
+
+[deployment]
+run = ["npm", "run", "dev"]
+deploymentTarget = "cloudrun"
+ignorePorts = false
+
+[[ports]]
+localPort = 3000
+externalPort = 80
+
+[[ports]]
+localPort = 3001
+externalPort = 3001
